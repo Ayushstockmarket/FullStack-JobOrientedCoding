@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <link rel="stylesheet" href="./Chapters.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+    {
+        question: "1. Web development mainly refers to:",
+        options: [
+            "Building mobile apps",
+            "Creating websites/web applications",
+            "Designing logos",
+            "Writing novels"
+        ],
+        answer: 1
+    },
+    {
+        question: "2. Which of the following is used to structure content on the web?",
+        options: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "PHP"
+        ],
+        answer: 0
+    },
+    {
+        question: "3. What does CSS stand for?",
+        options: [
+            "Cascading Style Sheets",
+            "Computer Style Sheets",
+            "Creative Style System",
+            "Color Style Sheets"
+        ],
+        answer: 0
+    },
+    {
+        question: "4. JavaScript is mainly used for:",
+        options: [
+            "Styling webpages",
+            "Structuring content",
+            "Adding interactivity",
+            "Managing servers"
+        ],
+        answer: 2
+    },
+    {
+        question: "5. Frontend development includes:",
+        options: [
+            "Databases",
+            "APIs",
+            "User Interface (UI)",
+            "Server Management"
+        ],
+        answer: 2
+    },
+    {
+        question: "6. Which language is used for backend development?",
+        options: [
+            "HTML",
+            "CSS",
+            "Python",
+            "Bootstrap"
+        ],
+        answer: 2
+    },
+    {
+        question: "7. A website’s server-side logic is handled by:",
+        options: [
+            "Frontend",
+            "Backend",
+            "SEO",
+            "UX"
+        ],
+        answer: 1
+    },
+    {
+        question: "8. Full Stack Developer works on:",
+        options: [
+            "Frontend only",
+            "Backend only",
+            "Both frontend and backend",
+            "Mobile apps only"
+        ],
+        answer: 2
+    },
+    {
+        question: "9. Which one is a frontend framework?",
+        options: [
+            "Node.js",
+            "Express.js",
+            "React",
+            "MongoDB"
+        ],
+        answer: 2
+    },
+    {
+        question: "10. Which one is a backend technology?",
+        options: [
+            "HTML",
+            "CSS",
+            "React",
+            "Node.js"
+        ],
+        answer: 3
+    },
+    {
+        question: "11. HTTP stands for:",
+        options: [
+            "Hyper Text Transfer Protocol",
+            "Hyperlink Text Transfer Protocol",
+            "Home Transfer Text Protocol",
+            "Hyper Tool Transfer Protocol"
+        ],
+        answer: 0
+    },
+    {
+        question: "12. What does API stand for?",
+        options: [
+            "Application Programming Interface",
+            "Advanced Program Integration",
+            "Applied Protocol Interface",
+            "Application Process Interaction"
+        ],
+        answer: 0
+    },
+    {
+        question: "13. Which database is commonly used with web apps?",
+        options: [
+            "MySQL",
+            "MS Paint",
+            "Excel",
+            "Notepad"
+        ],
+        answer: 0
+    },
+    {
+        question: "14. Git is used for:",
+        options: [
+            "Image editing",
+            "Database design",
+            "Version control",
+            "UI design"
+        ],
+        answer: 2
+    },
+    {
+        question: "15. Which is a popular code hosting platform?",
+        options: [
+            "Google Drive",
+            "Dropbox",
+            "GitHub",
+            "Outlook"
+        ],
+        answer: 2
+    },
+    {
+        question: "16. What is a domain name?",
+        options: [
+            "A type of hosting",
+            "A file on the server",
+            "Website address like google.com",
+            "An HTML tag"
+        ],
+        answer: 2
+    },
+    {
+        question: "17. What is responsive design?",
+        options: [
+            "Designing fast websites",
+            "Websites that work on all screen sizes",
+            "Designs that respond to emails",
+            "Offline website design"
+        ],
+        answer: 1
+    },
+    {
+        question: "18. Media queries are used in:",
+        options: [
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "PHP"
+        ],
+        answer: 2
+    },
+    {
+        question: "19. What is Bootstrap?",
+        options: [
+            "A web server",
+            "A CSS framework",
+            "An image editor",
+            "A backend tool"
+        ],
+        answer: 1
+    },
+    {
+        question: "20. Which is a NoSQL database?",
+        options: [
+            "PostgreSQL",
+            "MongoDB",
+            "MySQL",
+            "SQLite"
+        ],
+        answer: 1
+    },
+    {
+        question: "21. What does the <a> tag do in HTML?",
+        options: [
+            "Adds audio",
+            "Makes a link",
+            "Defines a paragraph",
+            "Creates a form"
+        ],
+        answer: 1
+    },
+    {
+        question: "22. Which tag is used for inserting an image?",
+        options: [
+            "<img>",
+            "<image>",
+            "<pic>",
+            "<src>"
+        ],
+        answer: 0
+    },
+    {
+        question: "23. What is the use of console.log in JavaScript?",
+        options: [
+            "To write CSS",
+            "To display content",
+            "To debug or log output",
+            "To create loops"
+        ],
+        answer: 2
+    },
+    {
+        question: "24. Which method is used to fetch data from APIs?",
+        options: [
+            "getData()",
+            "fetch()",
+            "apiCall()",
+            "loadData()"
+        ],
+        answer: 1
+    },
+    {
+        question: "25. Which of these is NOT a valid HTML5 semantic tag?",
+        options: [
+            "<header>",
+            "<footer>",
+            "<main>",
+            "<style>"
+        ],
+        answer: 3
+    },
+    {
+        question: "26. Which company created React.js?",
+        options: [
+            "Google",
+            "Facebook",
+            "Microsoft",
+            "Twitter"
+        ],
+        answer: 1
+    },
+    {
+        question: "27. MVC in web development stands for:",
+        options: [
+            "Model View Controller",
+            "Main Variable Control",
+            "Multiple View Context",
+            "Model Visual Core"
+        ],
+        answer: 0
+    },
+    {
+        question: "28. Which of these helps in improving SEO?",
+        options: [
+            "Alt attributes in images",
+            "Using tables for layout",
+            "Using many animations",
+            "Adding inline styles"
+        ],
+        answer: 0
+    },
+    {
+        question: "29. A web server does what?",
+        options: [
+            "Hosts and serves web pages",
+            "Designs UI",
+            "Compiles Java code",
+            "Sends spam emails"
+        ],
+        answer: 0
+    },
+    {
+        question: "30. What is the role of CDN in web development?",
+        options: [
+            "Stores passwords",
+            "Improves performance by delivering content quickly",
+            "Encrypts web pages",
+            "Blocks ads"
+        ],
+        answer: 1
+    }
+];
+
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

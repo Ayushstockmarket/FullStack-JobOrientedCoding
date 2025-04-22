@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is the purpose of a portfolio website?",
+          options: [
+            "To write blog posts only",
+            "To showcase skills, projects, and contact information",
+            "To host games",
+            "To create a login system",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "2. Which tag is used to define the structure of a webpage?",
+          options: ["<head>", "<html>", "<body>", "<main>"],
+          answer: 1,
+        },
+        {
+          question:
+            "3. Which HTML element should wrap the entire webpage content?",
+          options: ["<html>", "<section>", "<main>", "<body>"],
+          answer: 3,
+        },
+        {
+          question:
+            "4. Which tag is ideal to wrap your name as a title on the portfolio?",
+          options: ["<h1>", "<title>", "<p>", "<header>"],
+          answer: 0,
+        },
+        {
+          question:
+            "5. Which tag is used to add a short description about yourself?",
+          options: ["<about>", "<bio>", "<p>", "<desc>"],
+          answer: 2,
+        },
+        {
+          question: "6. Which tag should be used for contact information?",
+          options: ["<section>", "<footer>", "<contact>", "<aside>"],
+          answer: 1,
+        },
+        {
+          question: "7. What is the best tag to list your projects in HTML?",
+          options: ["<ul>", "<project>", "<div>", "<section>"],
+          answer: 3,
+        },
+        {
+          question: "8. How do you insert a hyperlink to your GitHub?",
+          options: [
+            "<a href='https://github.com/username'>GitHub</a>",
+            "<link>GitHub</link>",
+            "<href>GitHub</href>",
+            "<p url='github'>GitHub</p>",
+          ],
+          answer: 0,
+        },
+        {
+          question: "9. What tag is used to insert an image of yourself?",
+          options: ["<img>", "<image>", "<src>", "<photo>"],
+          answer: 0,
+        },
+        {
+          question:
+            "10. Which attribute is used in <img> to provide alternative text?",
+          options: ["title", "src", "alt", "name"],
+          answer: 2,
+        },
+        {
+          question: "11. What element groups content and makes layout easier?",
+          options: ["<div>", "<span>", "<group>", "<box>"],
+          answer: 0,
+        },
+        {
+          question: "12. How do you add a resume download link?",
+          options: [
+            "<a download href='resume.pdf'>Download Resume</a>",
+            "<link src='resume.pdf'>",
+            "<download file='resume.pdf'>",
+            "<resume href='resume.pdf'>",
+          ],
+          answer: 0,
+        },
+        {
+          question: "13. Which tag creates a list of skills?",
+          options: ["<li>", "<skills>", "<ul>", "<dl>"],
+          answer: 2,
+        },
+        {
+          question: "14. Which tag is used for each item in a list?",
+          options: ["<li>", "<item>", "<ul>", "<list>"],
+          answer: 0,
+        },
+        {
+          question: "15. What does <header> typically include in a portfolio?",
+          options: [
+            "Contact form",
+            "Footer content",
+            "Intro title and nav links",
+            "Image gallery",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "16. What’s the best way to divide portfolio sections like About, Projects, Contact?",
+          options: [
+            "Using <div>",
+            "Using <section>",
+            "Using <body>",
+            "Using <footer>",
+          ],
+          answer: 1,
+        },
+        {
+          question: "17. How do you open a link in a new tab?",
+          options: [
+            "<a href='url' open='new'>",
+            "<a href='url' tab='_blank'>",
+            "<a href='url' target='_blank'>",
+            "<a url='newtab'>",
+          ],
+          answer: 2,
+        },
+        {
+          question: "18. What does the <title> tag affect?",
+          options: [
+            "Text color",
+            "Page title in browser tab",
+            "Heading in body",
+            "Font size",
+          ],
+          answer: 1,
+        },
+        {
+          question: "19. Where should the <title> tag be placed?",
+          options: [
+            "Inside <body>",
+            "Outside <html>",
+            "Inside <head>",
+            "Inside <footer>",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "20. What is the main advantage of using semantic HTML like <article>, <section>?",
+          options: [
+            "Faster loading",
+            "Better SEO and accessibility",
+            "Smaller file size",
+            "Cooler design",
+          ],
+          answer: 1,
+        },
+        {
+          question: "21. Which tag adds copyright info?",
+          options: ["<small>", "<copyright>", "<footer>", "<aside>"],
+          answer: 2,
+        },
+        {
+          question:
+            "22. Which tag is suitable to wrap the entire resume download button?",
+          options: ["<section>", "<aside>", "<div>", "<download>"],
+          answer: 2,
+        },
+        {
+          question: "23. What is the correct way to add a favicon?",
+          options: [
+            "<favicon src='favicon.ico'>",
+            "<link rel='icon' href='favicon.ico'>",
+            "<icon href='favicon.ico'>",
+            "<img rel='icon'>",
+          ],
+          answer: 1,
+        },
+        {
+          question: "24. Which section should favicon link go in?",
+          options: ["<body>", "<footer>", "<head>", "<nav>"],
+          answer: 2,
+        },
+        {
+          question:
+            "25. If you want your contact form to actually send emails, you need:",
+          options: [
+            "Only HTML",
+            "HTML + CSS",
+            "Server-side code or service",
+            "JavaScript only",
+          ],
+          answer: 2,
+        },
+        {
+          question: "26. What is the purpose of using <nav> in your portfolio?",
+          options: [
+            "Display image",
+            "Add animations",
+            "Create navigation menu",
+            "List projects",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "27. Which element can you use to display your educational background?",
+          options: ["<form>", "<section>", "<edu>", "<record>"],
+          answer: 1,
+        },
+        {
+          question:
+            "28. Which attribute in <a> specifies the link destination?",
+          options: ["href", "src", "link", "path"],
+          answer: 0,
+        },
+        {
+          question:
+            "29. Where should you place your portfolio <script> tags (for future JS)?",
+          options: [
+            "Inside <head>",
+            "At the bottom of <body>",
+            "After <footer>",
+            "Before <html>",
+          ],
+          answer: 1,
+        },
+        {
+          question: "30. A basic portfolio should include:",
+          options: [
+            "Login form, signup, database",
+            "Games, movies, videos",
+            "About me, Projects, Contact info",
+            "Only one image",
+          ],
+          answer: 2,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

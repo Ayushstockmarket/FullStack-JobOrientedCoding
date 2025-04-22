@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is the purpose of a calculator app?",
+          options: [
+            "To perform mathematical operations",
+            "To play games",
+            "To manage files",
+            "To create images",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "2. Which HTML element is commonly used for creating buttons in a calculator app?",
+          options: ["<button>", "<input>", "<div>", "<span>"],
+          answer: 0,
+        },
+        {
+          question: "3. How can you display text inside a button in HTML?",
+          options: [
+            "By using the button's innerHTML property",
+            "By using the button's value attribute",
+            "By using the button's name attribute",
+            "By using the button's textContent",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "4. In a basic calculator app, what should happen when a user clicks a button?",
+          options: [
+            "The button should trigger a function to update the display",
+            "The button should change color",
+            "The button should animate",
+            "The button should open a new tab",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "5. Which event is most commonly used to detect a button click in JavaScript?",
+          options: ["click", "hover", "dblclick", "keypress"],
+          answer: 0,
+        },
+        {
+          question:
+            "6. How do you add an event listener for a button in JavaScript?",
+          options: [
+            "button.addEventListener('click', function);",
+            "button.onClick(function);",
+            "button.addEvent('click', function);",
+            "button.click(function);",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "7. What is the purpose of the 'eval()' function in JavaScript?",
+          options: [
+            "It evaluates a string as a JavaScript expression",
+            "It executes a loop",
+            "It validates user input",
+            "It formats a string",
+          ],
+          answer: 0,
+        },
+        {
+          question: "8. How can you perform addition in JavaScript?",
+          options: ["a + b", "a.add(b)", "add(a, b)", "a.plus(b)"],
+          answer: 0,
+        },
+        {
+          question:
+            "9. Which CSS property is used to center the calculator container on the page?",
+          options: [
+            "margin: 0 auto;",
+            "text-align: center;",
+            "position: center;",
+            "display: block;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "10. How can you change the background color of the calculator?",
+          options: [
+            "By setting the background-color property in CSS",
+            "By using JavaScript to change the color",
+            "By adding an image as the background",
+            "By changing the HTML color attribute",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "11. Which HTML element is used to create an input field in the calculator?",
+          options: ["<input>", "<textarea>", "<select>", "<button>"],
+          answer: 0,
+        },
+        {
+          question:
+            "12. How can you clear the input field of the calculator using JavaScript?",
+          options: [
+            "inputField.value = '';",
+            "inputField.clear();",
+            "inputField.reset();",
+            "inputField.remove();",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "13. How do you display the result of an operation in the calculator?",
+          options: [
+            "By changing the value of the input field",
+            "By alerting the result",
+            "By logging it to the console",
+            "By displaying it in a div",
+          ],
+          answer: 0,
+        },
+        {
+          question: "14. How do you perform multiplication in JavaScript?",
+          options: ["a * b", "a.multiply(b)", "multiply(a, b)", "a.times(b)"],
+          answer: 0,
+        },
+        {
+          question:
+            "15. What does the 'parseFloat()' function do in JavaScript?",
+          options: [
+            "Converts a string to a floating point number",
+            "Converts a string to an integer",
+            "Rounds a number to the nearest integer",
+            "Converts a number to a string",
+          ],
+          answer: 0,
+        },
+        {
+          question: "16. How do you implement division in JavaScript?",
+          options: ["a / b", "a.divide(b)", "divide(a, b)", "a.over(b)"],
+          answer: 0,
+        },
+        {
+          question:
+            "17. Which CSS property is used to give the calculator buttons some spacing?",
+          options: ["padding", "margin", "width", "border"],
+          answer: 0,
+        },
+        {
+          question: "18. How can you handle keyboard input in the calculator?",
+          options: [
+            "By adding an event listener for the 'keydown' or 'keypress' event",
+            "By using the 'click' event on the input field",
+            "By using the 'focus' event",
+            "By detecting mouse movements",
+          ],
+          answer: 0,
+        },
+        {
+          question: "19. Which operator is used for subtraction in JavaScript?",
+          options: ["-", "subtract()", "minus()", "subtract"],
+          answer: 0,
+        },
+        {
+          question:
+            "20. How can you prevent the page from reloading when a form is submitted in JavaScript?",
+          options: [
+            "event.preventDefault()",
+            "form.stopPropagation()",
+            "form.submit()",
+            "window.prevent()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "21. How can you prevent multiple decimal points from being entered into the calculator?",
+          options: [
+            "By checking if the input already contains a decimal point",
+            "By using a regular expression to validate the input",
+            "By limiting the number of decimal places",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "22. Which event can be used to detect when a user presses a key on the keyboard?",
+          options: ["keydown", "keypress", "keyup", "all of the above"],
+          answer: 3,
+        },
+        {
+          question:
+            "23. How can you add a decimal point to the calculator input?",
+          options: [
+            "By using a button that appends a '.' to the input",
+            "By using the addDecimal() method",
+            "By using the insertDecimal() method",
+            "By appending a string with a decimal point",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. Which of the following is an example of an arithmetic operator in JavaScript?",
+          options: ["+", "%", "/", "All of the above"],
+          answer: 3,
+        },
+        {
+          question:
+            "25. How can you add a 'clear' button functionality in a calculator app?",
+          options: [
+            "By setting the input field value to an empty string when clicked",
+            "By resetting the calculator state to its initial values",
+            "By removing all event listeners",
+            "Both A and B",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "26. How can you disable buttons that are not valid (e.g., two decimal points in a number)?",
+          options: [
+            "By using the 'disabled' attribute in HTML",
+            "By using JavaScript to prevent button click events",
+            "By using CSS to hide the button",
+            "Both A and B",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "27. Which CSS property can you use to change the font size of the calculator buttons?",
+          options: [
+            "font-size",
+            "font-weight",
+            "text-transform",
+            "line-height",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. How can you improve the accessibility of a calculator app?",
+          options: [
+            "By adding proper ARIA labels to the buttons",
+            "By ensuring the calculator is usable with keyboard navigation",
+            "By adding alternative text descriptions for the buttons",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "29. How can you round a result to two decimal places in JavaScript?",
+          options: [
+            "result.toFixed(2);",
+            "result.round(2);",
+            "result.toPrecision(2);",
+            "result.floor(2);",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "30. How do you implement the functionality of the equal button in a calculator app?",
+          options: [
+            "By evaluating the input expression and displaying the result",
+            "By adding the input to the output and clearing the input",
+            "By adding a number to the input field",
+            "By closing the app",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

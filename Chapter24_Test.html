@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question:
+            "1. What is the first step in becoming a successful web developer?",
+          options: [
+            "Learn advanced JavaScript",
+            "Master backend technologies",
+            "Understand basic HTML, CSS, and JavaScript",
+            "Create a portfolio",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "2. Which of the following is most important when building a learning roadmap for web development?",
+          options: [
+            "Focusing on only one technology",
+            "Understanding the fundamentals of web development",
+            "Learning the latest technologies first",
+            "Jumping straight into frameworks",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "3. What should a web developer focus on after learning HTML, CSS, and JavaScript?",
+          options: [
+            "Start learning backend development",
+            "Learn advanced JavaScript frameworks",
+            "Build personal projects",
+            "Focus only on design",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "4. What is the best way to stay updated with the latest trends in web development?",
+          options: [
+            "Rely only on books",
+            "Follow blogs, podcasts, and attend webinars",
+            "Stick to a single technology",
+            "Only learn from official documentation",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "5. Which backend technology should a web developer learn after mastering frontend skills?",
+          options: ["PHP", "Node.js", "C++", "Java"],
+          answer: 1,
+        },
+        {
+          question: "6. Why is learning Git important for a web developer?",
+          options: [
+            "It helps in tracking project progress and collaborating with teams",
+            "It improves coding speed",
+            "It is used to design websites",
+            "It helps with SEO optimization",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "7. After learning Node.js, what should a web developer focus on next?",
+          options: [
+            "React or Angular for frontend",
+            "Mastering server-side deployment",
+            "Learn C++ for low-level programming",
+            "Focusing on cybersecurity",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "8. How can a web developer improve their problem-solving skills?",
+          options: [
+            "By practicing coding challenges",
+            "By only watching tutorials",
+            "By focusing on design alone",
+            "By relying on others for solutions",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "9. What is the significance of version control systems like Git for web developers?",
+          options: [
+            "To save time on development",
+            "To store and manage changes in code over time",
+            "To design websites faster",
+            "To host websites",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "10. What is the most important step after learning the basics of web development?",
+          options: [
+            "Building a strong portfolio",
+            "Mastering server-side programming",
+            "Jumping into freelance work immediately",
+            "Learning every framework",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "11. What should a web developer focus on to become proficient in frontend development?",
+          options: [
+            "Learning HTML, CSS, JavaScript, and responsive design",
+            "Learning backend technologies first",
+            "Mastering Git and GitHub",
+            "Only focusing on learning frameworks",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "12. Which of these should be learned first for backend web development?",
+          options: [
+            "Database management systems like MongoDB or MySQL",
+            "Frontend frameworks like React",
+            "Version control with Git",
+            "HTML and CSS",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "13. What is the role of learning frameworks like React or Angular in a web developer's career?",
+          options: [
+            "To build complex and efficient frontend applications",
+            "To replace HTML and CSS completely",
+            "To focus on backend logic",
+            "To learn JavaScript only",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "14. How important is it for a web developer to have knowledge of databases?",
+          options: [
+            "Very important for full-stack development",
+            "Not necessary for frontend development",
+            "Only important for backend developers",
+            "Not needed at all",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "15. Which skill should a web developer prioritize for building scalable applications?",
+          options: [
+            "Version control with Git",
+            "Frontend design",
+            "Learning deployment tools like Docker",
+            "Database management and backend logic",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "16. What is the next step after mastering a frontend framework like React or Angular?",
+          options: [
+            "Learning a backend framework like Express or Django",
+            "Mastering HTML and CSS",
+            "Learning basic Python",
+            "Focusing on SEO optimization",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "17. What is an essential part of a web developer's continuous learning?",
+          options: [
+            "Experimenting with new technologies and frameworks",
+            "Sticking to the same language for life",
+            "Only attending coding bootcamps",
+            "Ignoring user feedback",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "18. How can a web developer enhance their skills in deployment and hosting?",
+          options: [
+            "By using platforms like Heroku, AWS, or Netlify",
+            "By focusing only on frontend skills",
+            "By avoiding cloud services",
+            "By learning backend languages only",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "19. How can a web developer improve their problem-solving ability?",
+          options: [
+            "By participating in hackathons or coding competitions",
+            "By only watching tutorials",
+            "By working in teams only",
+            "By avoiding debugging",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "20. What is a good strategy for a web developer to keep improving their career?",
+          options: [
+            "Keep learning new languages, frameworks, and tools",
+            "Focus only on one technology for life",
+            "Avoid any certifications or online courses",
+            "Learn only through personal projects",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "21. After gaining experience in web development, what is the next step?",
+          options: [
+            "Contributing to open-source projects",
+            "Sticking to the same job role for years",
+            "Learning mobile app development",
+            "Focusing solely on design",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "22. Which skill can significantly boost a web developer's career growth?",
+          options: [
+            "Mastering Git and version control",
+            "Learning as many frameworks as possible",
+            "Sticking to one programming language",
+            "Avoiding databases",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "23. What should be the priority for a web developer after building personal projects?",
+          options: [
+            "Building a strong portfolio",
+            "Learning mobile app development",
+            "Building complex games",
+            "Ignoring version control",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. Which of the following is essential for a full-stack developer to learn?",
+          options: [
+            "Frontend and backend frameworks",
+            "Only frontend skills",
+            "Basic HTML and CSS",
+            "Mobile app development",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "25. What is the best way to find a web developer job after completing your learning?",
+          options: [
+            "Building a strong resume and portfolio",
+            "Only applying to one company",
+            "Learning one technology only",
+            "Ignoring networking and connections",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "26. Which of the following is a good habit for a web developer?",
+          options: [
+            "Regularly practicing coding problems",
+            "Only focusing on theory",
+            "Never learning new technologies",
+            "Ignoring debugging",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "27. What role does networking play in a web developer's career?",
+          options: [
+            "Helps in finding job opportunities and collaborations",
+            "Has no effect on the career",
+            "Limits job opportunities",
+            "Only important for designers",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. How can a web developer stay competitive in the job market?",
+          options: [
+            "Constantly learning and updating their skills",
+            "Focusing on one skill forever",
+            "Avoiding collaboration with others",
+            "Learning just enough to get by",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "29. How important is soft skills development for a web developer?",
+          options: [
+            "Very important for team collaboration and client interaction",
+            "Not necessary at all",
+            "Only important for designers",
+            "Only useful for managers",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "30. What is the key to long-term success as a web developer?",
+          options: [
+            "Continuous learning and adapting to new technologies",
+            "Only focusing on one technology",
+            "Ignoring feedback from clients",
+            "Focusing on salary rather than skill development",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

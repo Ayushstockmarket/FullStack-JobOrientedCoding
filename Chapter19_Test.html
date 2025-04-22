@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is Node.js?",
+          options: [
+            "A JavaScript framework",
+            "A backend JavaScript runtime environment",
+            "A front-end JavaScript library",
+            "A JavaScript package manager",
+          ],
+          answer: 1,
+        },
+        {
+          question: "2. Node.js is built on top of which engine?",
+          options: ["V8 JavaScript Engine", "SpiderMonkey", "Chakra", "Rhino"],
+          answer: 0,
+        },
+        {
+          question: "3. Which of the following is NOT a feature of Node.js?",
+          options: [
+            "Asynchronous programming",
+            "Single-threaded event loop",
+            "Runs in a web browser",
+            "Non-blocking I/O operations",
+          ],
+          answer: 2,
+        },
+        {
+          question: "4. Which protocol does Node.js use for communication?",
+          options: ["HTTP", "FTP", "SMTP", "TCP/IP"],
+          answer: 3,
+        },
+        {
+          question:
+            "5. What is the primary reason Node.js is preferred for real-time applications?",
+          options: [
+            "It has built-in support for multiple languages",
+            "It allows for fast, non-blocking asynchronous operations",
+            "It runs only on Linux",
+            "It offers better security",
+          ],
+          answer: 1,
+        },
+        {
+          question: "6. What is NPM in Node.js?",
+          options: [
+            "Node Package Manager",
+            "Node Performance Monitor",
+            "Node Programming Module",
+            "Node Project Manager",
+          ],
+          answer: 0,
+        },
+        {
+          question: "7. How do you create a basic HTTP server in Node.js?",
+          options: [
+            "Using the 'http' module",
+            "Using the 'express' module",
+            "Using the 'server' module",
+            "Using the 'fs' module",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "8. Which of the following is true about Node.js's event-driven architecture?",
+          options: [
+            "It allows multiple processes to run simultaneously",
+            "It uses synchronous operations",
+            "It processes requests one by one in a queue",
+            "It is based on multithreading",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "9. What is the purpose of the 'require' function in Node.js?",
+          options: [
+            "To include external modules",
+            "To start a new server",
+            "To manage database connections",
+            "To create a new HTTP request",
+          ],
+          answer: 0,
+        },
+        {
+          question: "10. Which of these are the core modules in Node.js?",
+          options: [
+            "express, mongoose, cors",
+            "http, fs, path",
+            "jquery, react, angular",
+            "mongoDB, angular, vue",
+          ],
+          answer: 1,
+        },
+        {
+          question: "11. What does the 'fs' module in Node.js allow you to do?",
+          options: [
+            "Create and manage file systems",
+            "Serve files to the client",
+            "Create and read files",
+            "Handle server requests",
+          ],
+          answer: 2,
+        },
+        {
+          question: "12. How do you install a package in Node.js using NPM?",
+          options: [
+            "npm start <package-name>",
+            "npm add <package-name>",
+            "npm install <package-name>",
+            "npm load <package-name>",
+          ],
+          answer: 2,
+        },
+        {
+          question: "13. What does the 'path' module in Node.js help with?",
+          options: [
+            "Reading and writing to files",
+            "Parsing and working with file paths",
+            "Handling server requests",
+            "Sending email notifications",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "14. Which statement is true about the non-blocking I/O model in Node.js?",
+          options: [
+            "The server waits for one operation to complete before starting the next",
+            "It allows Node.js to perform I/O operations without blocking the main thread",
+            "It only works with synchronous code",
+            "None of the above",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "15. What is an example of asynchronous operation in Node.js?",
+          options: [
+            "Reading a file using fs.readFile",
+            "Running a while loop",
+            "Creating an HTTP request synchronously",
+            "Blocking the event loop for a while",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "16. What is the purpose of the 'events' module in Node.js?",
+          options: [
+            "To create and handle events",
+            "To run server requests",
+            "To create an HTTP server",
+            "To parse JSON data",
+          ],
+          answer: 0,
+        },
+        {
+          question: "17. How does Node.js handle multiple requests?",
+          options: [
+            "By using multiple threads",
+            "By blocking the event loop until the request is completed",
+            "By processing requests in a non-blocking, event-driven manner",
+            "By assigning each request to a different core processor",
+          ],
+          answer: 2,
+        },
+        {
+          question: "18. What is the 'callback hell' problem in Node.js?",
+          options: [
+            "Using too many nested callbacks in code",
+            "Running multiple servers simultaneously",
+            "When callbacks are never called",
+            "When callbacks are not executed in sequence",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "19. What is the solution to the 'callback hell' problem in Node.js?",
+          options: [
+            "Using promises and async/await",
+            "Using synchronous code",
+            "Writing code without any callbacks",
+            "Using only one callback per function",
+          ],
+          answer: 0,
+        },
+        {
+          question: "20. What does the 'process' module in Node.js provide?",
+          options: [
+            "Tools to manage server processes and the environment",
+            "HTTP request management",
+            "File management utilities",
+            "Server-side rendering tools",
+          ],
+          answer: 0,
+        },
+        {
+          question: "21. How can you handle errors in Node.js?",
+          options: [
+            "Using try-catch blocks",
+            "By emitting an 'error' event",
+            "Using 'error' module",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "22. What is the 'npm start' command used for in a Node.js project?",
+          options: [
+            "Starting the development server",
+            "Starting the Node.js application",
+            "Installing packages",
+            "Compiling JavaScript code",
+          ],
+          answer: 1,
+        },
+        {
+          question: "23. What does the 'express' module in Node.js help with?",
+          options: [
+            "Handling HTTP requests and responses",
+            "Parsing command line arguments",
+            "Reading files from the file system",
+            "Running background tasks",
+          ],
+          answer: 0,
+        },
+        {
+          question: "24. What is a 'middleware' in Express.js?",
+          options: [
+            "A function that processes HTTP requests before reaching the main logic",
+            "A server-side framework for routing",
+            "A database query processor",
+            "A server configuration tool",
+          ],
+          answer: 0,
+        },
+        {
+          question: "25. Which of the following is true about Node.js?",
+          options: [
+            "Node.js is a synchronous programming environment",
+            "Node.js is built for frontend development",
+            "Node.js runs JavaScript on the server-side",
+            "Node.js is not suitable for real-time applications",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "26. Which of the following is an example of a package you can install in Node.js?",
+          options: ["React", "Express", "Angular", "Vue"],
+          answer: 1,
+        },
+        {
+          question: "27. What is the 'npm init' command used for?",
+          options: [
+            "Creating a new Node.js project",
+            "Installing packages",
+            "Starting the server",
+            "Compiling JavaScript code",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. What is the purpose of the 'console' object in Node.js?",
+          options: [
+            "To manage server logs",
+            "To handle HTTP requests",
+            "To display debug messages",
+            "To store data",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "29. Which of the following is a built-in feature of Node.js?",
+          options: [
+            "Database management",
+            "Real-time file synchronization",
+            "WebSocket for real-time communication",
+            "All of the above",
+          ],
+          answer: 2,
+        },
+        {
+          question: "30. How does Node.js achieve high performance?",
+          options: [
+            "By using a multithreaded architecture",
+            "By using a non-blocking event-driven model",
+            "By storing data in memory",
+            "By only executing synchronous code",
+          ],
+          answer: 1,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

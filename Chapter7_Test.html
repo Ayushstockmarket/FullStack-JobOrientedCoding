@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What does CSS stand for?",
+          options: [
+            "Cascading Style Sheets",
+            "Creative Style Sheets",
+            "Cascading Script Sheets",
+            "Clever Style Sheets",
+          ],
+          answer: 0,
+        },
+        {
+          question: "2. What is the primary purpose of CSS?",
+          options: [
+            "To define the structure of a webpage",
+            "To create content for a webpage",
+            "To style and layout web pages",
+            "To create navigation menus",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "3. Which of the following is used to apply CSS styles to a webpage?",
+          options: ["style tag", "link tag", "script tag", "meta tag"],
+          answer: 0,
+        },
+        {
+          question: "4. How do you change the text color of an element in CSS?",
+          options: [
+            "color: #000000;",
+            "text-color: blue;",
+            "font-color: red;",
+            "background-color: yellow;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "5. Which CSS property is used to change the background color of an element?",
+          options: ["color", "bg-color", "background-color", "text-color"],
+          answer: 2,
+        },
+        {
+          question: "6. Which CSS property is used to change the font size?",
+          options: ["font-size", "font-weight", "font-family", "text-size"],
+          answer: 0,
+        },
+        {
+          question: "7. Which HTML tag is used to link an external CSS file?",
+          options: ["<style>", "<script>", "<link>", "<css>"],
+          answer: 2,
+        },
+        {
+          question: "8. How do you add comments in CSS?",
+          options: [
+            "// comment",
+            "/* comment */",
+            "<!-- comment -->",
+            "# comment",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "9. Which of the following is the correct CSS syntax to make text bold?",
+          options: [
+            "font-weight: bold;",
+            "text-style: bold;",
+            "font-style: bold;",
+            "font-family: bold;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "10. Which CSS property controls the space between the content and the border of an element?",
+          options: ["padding", "margin", "border-spacing", "spacing"],
+          answer: 0,
+        },
+        {
+          question:
+            "11. How do you select all elements with the class 'example' in CSS?",
+          options: [".example", "#example", "example", "*example"],
+          answer: 0,
+        },
+        {
+          question:
+            "12. Which CSS property is used to set the space between elements?",
+          options: ["padding", "margin", "spacing", "gap"],
+          answer: 1,
+        },
+        {
+          question:
+            "13. How do you center a block element horizontally in CSS?",
+          options: [
+            "margin-left: auto; margin-right: auto;",
+            "align-center: true;",
+            "text-align: center;",
+            "center-align: block;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "14. What is the default value of the position property?",
+          options: ["static", "relative", "absolute", "fixed"],
+          answer: 0,
+        },
+        {
+          question:
+            "15. Which CSS property is used to set the width of an element?",
+          options: ["height", "width", "box-sizing", "length"],
+          answer: 1,
+        },
+        {
+          question: "16. Which property is used to set the text alignment?",
+          options: [
+            "text-align",
+            "align-text",
+            "justify-content",
+            "align-items",
+          ],
+          answer: 0,
+        },
+        {
+          question: "17. How can you apply CSS to an element with id 'header'?",
+          options: [
+            "#header { }",
+            ".header { }",
+            "header { }",
+            "id:header { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "18. Which property is used to change the font family of text?",
+          options: ["font-family", "font-style", "font-type", "text-family"],
+          answer: 0,
+        },
+        {
+          question:
+            "19. What is the correct CSS syntax to make the background color of an element green?",
+          options: [
+            "background-color: green;",
+            "color: green;",
+            "bg-color: green;",
+            "background: green;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "20. What property in CSS can change the height of an element?",
+          options: ["width", "height", "size", "scale"],
+          answer: 1,
+        },
+        {
+          question:
+            "21. Which property is used to set the border radius of an element?",
+          options: [
+            "border-radius",
+            "border-style",
+            "radius-border",
+            "corner-radius",
+          ],
+          answer: 0,
+        },
+        {
+          question: "22. How can you make text italic in CSS?",
+          options: [
+            "font-style: italic;",
+            "text-style: italic;",
+            "font-family: italic;",
+            "text-decoration: italic;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "23. What is the purpose of the z-index property?",
+          options: [
+            "To control text size",
+            "To control the stacking order of elements",
+            "To change the background color",
+            "To align elements",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "24. Which of the following is used to create a flex container?",
+          options: [
+            "display: flex;",
+            "flex: container;",
+            "display: inline-block;",
+            "position: flex;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "25. How do you make text bold and italic at the same time in CSS?",
+          options: [
+            "font-weight: bold; font-style: italic;",
+            "font-style: bold italic;",
+            "font-family: bolditalic;",
+            "font: italic bold;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "26. Which CSS property is used to control the layout of grid items?",
+          options: [
+            "grid-template-columns",
+            "grid-column",
+            "grid-layout",
+            "column-gap",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "27. How do you change the display of an element to block-level?",
+          options: [
+            "display: block;",
+            "display: flex;",
+            "position: block;",
+            "block-display: true;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. What property is used to make a link change color when hovered over?",
+          options: [
+            "hover-color",
+            "link-color",
+            "a:hover { color: red; }",
+            "color-hover",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "29. Which property is used to apply shadows to an element?",
+          options: [
+            "box-shadow",
+            "text-shadow",
+            "shadow-style",
+            "border-shadow",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "30. How can you make an element invisible but still take up space in the layout?",
+          options: [
+            "opacity: 0;",
+            "visibility: hidden;",
+            "display: none;",
+            "visibility: collapse;",
+          ],
+          answer: 1,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

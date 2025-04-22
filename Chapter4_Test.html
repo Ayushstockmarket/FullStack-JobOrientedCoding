@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <link rel="stylesheet" href="./Chapters.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+      {
+          question: "1. What does HTML stand for?",
+          options: [
+              "Hyperlinks and Text Markup Language",
+              "Home Tool Markup Language",
+              "Hyper Text Markup Language",
+              "Hyperlinking and Typing Markup Language"
+          ],
+          answer: 2
+      },
+      {
+          question: "2. HTML is used to:",
+          options: [
+              "Design graphics",
+              "Style web pages",
+              "Structure web content",
+              "Manage servers"
+          ],
+          answer: 2
+      },
+      {
+          question: "3. Which tag is used to create a hyperlink?",
+          options: [
+              "<link>",
+              "<a>",
+              "<href>",
+              "<url>"
+          ],
+          answer: 1
+      },
+      {
+          question: "4. Which tag is used to insert an image in HTML?",
+          options: [
+              "<img>",
+              "<image>",
+              "<pic>",
+              "<src>"
+          ],
+          answer: 0
+      },
+      {
+          question: "5. What is the correct HTML element for inserting a line break?",
+          options: [
+              "<break>",
+              "<br>",
+              "<lb>",
+              "<newline>"
+          ],
+          answer: 1
+      },
+      {
+          question: "6. Which tag defines the largest heading?",
+          options: [
+              "<heading>",
+              "<h6>",
+              "<h1>",
+              "<head>"
+          ],
+          answer: 2
+      },
+      {
+          question: "7. What is the correct HTML for making text bold?",
+          options: [
+              "<bold>",
+              "<strong>",
+              "<bld>",
+              "<b>"
+          ],
+          answer: 3
+      },
+      {
+          question: "8. What is the correct way to comment in HTML?",
+          options: [
+              "// comment",
+              "/* comment */",
+              "<!-- comment -->",
+              "# comment"
+          ],
+          answer: 2
+      },
+      {
+          question: "9. Which tag contains all visible content on the web page?",
+          options: [
+              "<head>",
+              "<meta>",
+              "<body>",
+              "<html>"
+          ],
+          answer: 2
+      },
+      {
+          question: "10. The <title> tag is placed inside:",
+          options: [
+              "<header>",
+              "<html>",
+              "<body>",
+              "<head>"
+          ],
+          answer: 3
+      },
+      {
+          question: "11. What attribute is used with <img> to define image location?",
+          options: [
+              "src",
+              "href",
+              "link",
+              "path"
+          ],
+          answer: 0
+      },
+      {
+          question: "12. Which attribute is used to provide extra info when hovered?",
+          options: [
+              "alt",
+              "tooltip",
+              "title",
+              "info"
+          ],
+          answer: 2
+      },
+      {
+          question: "13. Which HTML tag is used to create an unordered list?",
+          options: [
+              "<ol>",
+              "<li>",
+              "<ul>",
+              "<list>"
+          ],
+          answer: 2
+      },
+      {
+          question: "14. Which tag is used to define a table row?",
+          options: [
+              "<td>",
+              "<th>",
+              "<tr>",
+              "<table>"
+          ],
+          answer: 2
+      },
+      {
+          question: "15. Which attribute is used to open a link in a new tab?",
+          options: [
+              "new-tab",
+              "target='_blank'",
+              "window='new'",
+              "open='tab'"
+          ],
+          answer: 1
+      },
+      {
+          question: "16. HTML elements are nested by:",
+          options: [
+              "Using <nest> tag",
+              "Placing one element inside another",
+              "Using indentations",
+              "Using group()"
+          ],
+          answer: 1
+      },
+      {
+          question: "17. Which tag is used to embed a video in HTML5?",
+          options: [
+              "<vid>",
+              "<media>",
+              "<video>",
+              "<movie>"
+          ],
+          answer: 2
+      },
+      {
+          question: "18. The 'alt' attribute in <img> tag is used for:",
+          options: [
+              "Aligning image",
+              "Showing backup text if image not loaded",
+              "Setting image transparency",
+              "Changing background"
+          ],
+          answer: 1
+      },
+      {
+          question: "19. Which tag is used for creating dropdown options?",
+          options: [
+              "<select>",
+              "<input type='dropdown'>",
+              "<dropdown>",
+              "<option-list>"
+          ],
+          answer: 0
+      },
+      {
+          question: "20. Which input type is used for entering email?",
+          options: [
+              "text",
+              "email",
+              "mail",
+              "input-email"
+          ],
+          answer: 1
+      },
+      {
+          question: "21. Which HTML5 tag is used to define navigation links?",
+          options: [
+              "<menu>",
+              "<navigate>",
+              "<nav>",
+              "<path>"
+          ],
+          answer: 2
+      },
+      {
+          question: "22. The <!DOCTYPE html> declaration is used to:",
+          options: [
+              "Start the server",
+              "Define document type",
+              "Link stylesheets",
+              "Hide content"
+          ],
+          answer: 1
+      },
+      {
+          question: "23. Which tag is used to define metadata?",
+          options: [
+              "<meta>",
+              "<data>",
+              "<info>",
+              "<head>"
+          ],
+          answer: 0
+      },
+      {
+          question: "24. Which tag represents emphasized text?",
+          options: [
+              "<highlight>",
+              "<italic>",
+              "<em>",
+              "<mark>"
+          ],
+          answer: 2
+      },
+      {
+          question: "25. Which tag defines a section in a document?",
+          options: [
+              "<part>",
+              "<section>",
+              "<div>",
+              "<area>"
+          ],
+          answer: 1
+      },
+      {
+          question: "26. What is semantic HTML?",
+          options: [
+              "HTML with random names",
+              "HTML using predefined tags with meaning",
+              "HTML with only divs",
+              "HTML with CSS only"
+          ],
+          answer: 1
+      },
+      {
+          question: "27. What does <input type='checkbox'> create?",
+          options: [
+              "A text input",
+              "A radio button",
+              "A checkbox",
+              "A dropdown"
+          ],
+          answer: 2
+      },
+      {
+          question: "28. Which tag is used to embed audio?",
+          options: [
+              "<sound>",
+              "<music>",
+              "<audio>",
+              "<mp3>"
+          ],
+          answer: 2
+      },
+      {
+          question: "29. Which tag defines a client-side script in HTML?",
+          options: [
+              "<script>",
+              "<js>",
+              "<style>",
+              "<program>"
+          ],
+          answer: 0
+      },
+      {
+          question: "30. Which tag is used to group and style a section?",
+          options: [
+              "<class>",
+              "<group>",
+              "<div>",
+              "<section>"
+          ],
+          answer: 2
+      }
+  ];
+  
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

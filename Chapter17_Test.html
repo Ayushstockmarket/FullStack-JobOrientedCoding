@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is web hosting?",
+          options: [
+            "A process of designing websites",
+            "A service that allows individuals or organizations to host websites on the internet",
+            "A software used for web development",
+            "A server-side scripting language",
+          ],
+          answer: 1,
+        },
+        {
+          question: "2. What does a hosting provider do?",
+          options: [
+            "Stores websites and makes them accessible on the internet",
+            "Designs websites",
+            "Develops web applications",
+            "Manages social media accounts",
+          ],
+          answer: 0,
+        },
+        {
+          question: "3. What is the benefit of using free web hosting?",
+          options: [
+            "No need to pay for hosting",
+            "Faster website load times",
+            "Complete control over website security",
+            "Better customer support",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "4. Which of the following is a popular free web hosting service?",
+          options: ["GoDaddy", "Wix", "GitHub Pages", "Bluehost"],
+          answer: 2,
+        },
+        {
+          question:
+            "5. What is the maximum size limit for a free hosting plan typically?",
+          options: ["Unlimited", "1 GB", "5 GB", "10 GB"],
+          answer: 2,
+        },
+        {
+          question:
+            "6. Which platform is best known for providing free hosting for static websites?",
+          options: ["WordPress", "GitHub Pages", "Vercel", "Wix"],
+          answer: 1,
+        },
+        {
+          question: "7. What is a domain name in web hosting?",
+          options: [
+            "The server that hosts the website",
+            "The unique address that identifies a website on the internet",
+            "The software used to create websites",
+            "The HTML file of a website",
+          ],
+          answer: 1,
+        },
+        {
+          question: "8. How can you get a free domain with free hosting?",
+          options: [
+            "By purchasing a domain",
+            "By using a subdomain provided by the hosting service",
+            "By using a local server",
+            "By hosting on a personal server",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "9. Which free hosting service allows you to host a website directly from Git repositories?",
+          options: ["Netlify", "GitHub Pages", "Google Cloud", "AWS Free Tier"],
+          answer: 1,
+        },
+        {
+          question: "10. What is the main limitation of free hosting services?",
+          options: [
+            "Unlimited bandwidth",
+            "Lack of custom domain support",
+            "Limited customization",
+            "Lack of customer support",
+          ],
+          answer: 2,
+        },
+        {
+          question: "11. What is a subdomain in the context of free hosting?",
+          options: [
+            "A secondary domain purchased by the user",
+            "A part of the main domain, given by the hosting provider",
+            "A section of the internet where your website can be stored",
+            "A place where a web developer writes code",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "12. Which of these platforms provides free hosting with no ads?",
+          options: ["WordPress.com", "Wix", "GitHub Pages", "Weebly"],
+          answer: 2,
+        },
+        {
+          question: "13. What does SSL stand for?",
+          options: [
+            "Secure Socket Layer",
+            "Server Side Login",
+            "System Security Layer",
+            "Secure Site Layer",
+          ],
+          answer: 0,
+        },
+        {
+          question: "14. Why is SSL important for a website?",
+          options: [
+            "It helps in faster loading of the website",
+            "It helps in encrypting data and securing user information",
+            "It reduces server costs",
+            "It improves SEO rankings",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "15. Which of the following hosting services offers free SSL certificates?",
+          options: ["GitHub Pages", "InfinityFree", "Hostinger", "000WebHost"],
+          answer: 0,
+        },
+        {
+          question:
+            "16. What is the most common storage type for websites on free hosting?",
+          options: [
+            "Cloud storage",
+            "Hard disk storage",
+            "RAM storage",
+            "SSD storage",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "17. Which hosting provider offers free static website hosting and automatic HTTPS?",
+          options: ["Vercel", "GitHub Pages", "Netlify", "AWS Free Tier"],
+          answer: 2,
+        },
+        {
+          question:
+            "18. What is the main disadvantage of using free web hosting?",
+          options: [
+            "High website uptime",
+            "Limited customization options",
+            "No traffic limitations",
+            "Full customer support",
+          ],
+          answer: 1,
+        },
+        {
+          question: "19. What type of websites is free hosting suitable for?",
+          options: [
+            "Small static websites and personal blogs",
+            "E-commerce websites",
+            "High-traffic corporate websites",
+            "Complex web applications",
+          ],
+          answer: 0,
+        },
+        {
+          question: "20. Can you use custom domains with free hosting?",
+          options: [
+            "Yes, with all free hosting services",
+            "Yes, with some free hosting services",
+            "No, custom domains are not allowed",
+            "Custom domains are only available on paid plans",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "21. Which of the following is a free hosting service for WordPress websites?",
+          options: ["Wix", "WordPress.com", "GitHub Pages", "Netlify"],
+          answer: 1,
+        },
+        {
+          question:
+            "22. What type of websites are not recommended for free hosting?",
+          options: [
+            "Portfolio websites",
+            "Personal blogs",
+            "E-commerce websites",
+            "Static HTML sites",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "23. Which of the following is a feature offered by free hosting services?",
+          options: [
+            "Free SSL",
+            "Free domain",
+            "Unlimited bandwidth",
+            "Advertising on the website",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "24. Which of the following hosting platforms has a free tier with limited resources but powerful tools for developers?",
+          options: [
+            "Google Firebase",
+            "GitHub Pages",
+            "Vercel",
+            "AWS Free Tier",
+          ],
+          answer: 3,
+        },
+        {
+          question: "25. What does 'FTP' stand for in web hosting?",
+          options: [
+            "File Transfer Protocol",
+            "File Technical Platform",
+            "Fast Transfer Protocol",
+            "File Type Processor",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "26. Which of the following is a free hosting platform for static websites, providing automatic deployment from Git?",
+          options: ["Vercel", "WordPress.com", "GitHub Pages", "Weebly"],
+          answer: 0,
+        },
+        {
+          question: "27. What does 'cPanel' stand for in web hosting?",
+          options: [
+            "Content Panel",
+            "Control Panel",
+            "Customer Panel",
+            "Configuration Panel",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "28. Can free hosting services handle high traffic websites?",
+          options: [
+            "Yes, unlimited traffic is allowed",
+            "No, free hosting often has traffic limitations",
+            "Yes, but only for a short period",
+            "No, free hosting does not allow traffic",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "29. Which of the following hosting services offers a free plan with access to a database?",
+          options: ["WordPress.com", "InfinityFree", "000WebHost", "Netlify"],
+          answer: 1,
+        },
+        {
+          question: "30. What is the first step in hosting a website online?",
+          options: [
+            "Design the website",
+            "Choose a hosting provider",
+            "Register a domain name",
+            "Write the website code",
+          ],
+          answer: 2,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question:
+            "1. What is the primary purpose of a resume for a web developer?",
+          options: [
+            "To showcase personal hobbies",
+            "To list previous work experiences",
+            "To demonstrate coding skills and knowledge",
+            "To provide references only",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "2. Which of the following should NOT be included in a web developer's resume?",
+          options: [
+            "Technical skills",
+            "Projects",
+            "Personal social media accounts",
+            "Certifications",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "3. What is the most important section to include in a web developer's portfolio?",
+          options: [
+            "About Me",
+            "Contact Information",
+            "Project showcase",
+            "Hobbies",
+          ],
+          answer: 2,
+        },
+        {
+          question: "4. What is the role of a portfolio for a web developer?",
+          options: [
+            "To show personal interests",
+            "To demonstrate coding and design skills",
+            "To list certifications",
+            "To highlight academic achievements",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "5. Which of the following is a key feature of a well-organized web developer's portfolio?",
+          options: [
+            "Easy navigation",
+            "Overloading with projects",
+            "No personal branding",
+            "Minimal use of images",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "6. What is the best way to demonstrate web development skills in a portfolio?",
+          options: [
+            "Include a detailed resume",
+            "Include live project links and code samples",
+            "Use only images of websites",
+            "Focus only on your education",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "7. Which of the following is essential for a web developer's resume?",
+          options: [
+            "High school achievements",
+            "Personal hobbies and interests",
+            "A detailed list of programming languages",
+            "Listing online courses",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "8. What is a good way to showcase web development projects in a portfolio?",
+          options: [
+            "Static screenshots",
+            "Links to live websites",
+            "Lists of project descriptions",
+            "No examples of live websites",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "9. How should the 'Skills' section of a resume be organized for a web developer?",
+          options: [
+            "Alphabetically by skill",
+            "By experience level",
+            "By the most recent technology learned",
+            "By personal preference",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "10. What is the importance of a professional summary in a web developer's resume?",
+          options: [
+            "To describe personal interests",
+            "To summarize skills, experiences, and goals",
+            "To list all technical certifications",
+            "To provide contact details",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "11. What should be avoided in a web developer's portfolio?",
+          options: [
+            "Clear project descriptions",
+            "Easy-to-use navigation",
+            "Cluttered layout and slow loading time",
+            "Live project links",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "12. Which of the following is a key consideration when designing a web developer's resume?",
+          options: [
+            "Maximum use of colors and graphics",
+            "Simple, clean, and readable layout",
+            "Detailed personal information",
+            "Lengthy description of projects",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "13. When listing projects in a portfolio, what should each project include?",
+          options: [
+            "The name of the project only",
+            "A link to the project's repository or live site",
+            "Only the technologies used",
+            "A brief description and the technologies used",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "14. How often should a web developer update their portfolio?",
+          options: [
+            "Once every few years",
+            "Whenever they complete a new project",
+            "Only when they switch jobs",
+            "Only when they change technologies",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "15. Which tool can help a web developer create an online portfolio?",
+          options: ["GitHub", "WordPress", "LinkedIn", "All of the above"],
+          answer: 3,
+        },
+        {
+          question:
+            "16. What is the ideal length for a web developer's resume?",
+          options: [
+            "One to two pages",
+            "Five to six pages",
+            "As long as necessary",
+            "Just a paragraph",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "17. What type of projects should be prioritized in a web developer's portfolio?",
+          options: [
+            "Projects relevant to the job they're applying for",
+            "Personal projects only",
+            "Collaborative projects",
+            "Any project completed in the past",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "18. What section should come first in a web developer's resume?",
+          options: ["Education", "Experience", "Skills", "Contact Information"],
+          answer: 2,
+        },
+        {
+          question:
+            "19. What is the best practice for providing links to your web development projects?",
+          options: [
+            "Use live site links and GitHub repositories",
+            "Only include GitHub repositories",
+            "Include social media links",
+            "Only use portfolio website links",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "20. How can you show your contribution to a project in a portfolio?",
+          options: [
+            "List your specific role in the project",
+            "Only list the project title",
+            "Show the entire project's code",
+            "Provide feedback from clients",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "21. Which of the following is a common mistake on a web developer's resume?",
+          options: [
+            "Focusing too much on job duties",
+            "Using too many technical terms without explanation",
+            "Including too many personal details",
+            "Not listing any personal projects",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "22. How should a web developer demonstrate their proficiency in JavaScript?",
+          options: [
+            "By listing JavaScript courses",
+            "By showing JavaScript-related projects",
+            "By describing JavaScript syntax",
+            "By mentioning JavaScript books they’ve read",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "23. What type of design is ideal for a web developer's portfolio?",
+          options: [
+            "Visually engaging but not distracting",
+            "Minimalistic with basic colors",
+            "Graphic-heavy with animations",
+            "Complex and text-heavy",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. What should you do to make your portfolio stand out to employers?",
+          options: [
+            "Include animations and complex designs",
+            "Use a unique, modern layout and clear navigation",
+            "Overload it with content",
+            "Keep the design as basic as possible",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "25. What section in the portfolio should list a developer's technical certifications?",
+          options: ["Skills", "About Me", "Education", "Projects"],
+          answer: 2,
+        },
+        {
+          question:
+            "26. Which of the following can enhance your resume as a web developer?",
+          options: [
+            "Listing all technical languages you’ve learned",
+            "Mentioning personal interests and achievements",
+            "Describing your role in specific projects",
+            "Including online shopping habits",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "27. How do you make sure your web developer resume is ATS-friendly?",
+          options: [
+            "Use keywords from the job description",
+            "Include fancy fonts and designs",
+            "Write a long introduction",
+            "Use non-standard job titles",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. How can you use GitHub in a web developer's portfolio?",
+          options: [
+            "To showcase repositories of your personal projects",
+            "To list your educational qualifications",
+            "To share your social media accounts",
+            "To provide a link to your resume",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "29. What should you include in the 'About Me' section of a web developer's portfolio?",
+          options: [
+            "A list of all the technologies you’ve learned",
+            "A brief personal story and your professional goals",
+            "Your daily routine",
+            "Your family details",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "30. Which of these is a good way to keep your resume up to date?",
+          options: [
+            "Update it whenever you finish a project or learn a new skill",
+            "Only update it when applying for a job",
+            "Leave it unchanged for a year",
+            "Focus only on your education",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

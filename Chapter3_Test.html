@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <link rel="stylesheet" href="./Chapters.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+      {
+          question: "1. What is the first tool you need to write code?",
+          options: [
+              "Video player",
+              "Code editor",
+              "Spreadsheet software",
+              "PDF reader"
+          ],
+          answer: 1
+      },
+      {
+          question: "2. Which of the following is a popular code editor?",
+          options: [
+              "Photoshop",
+              "Visual Studio Code",
+              "MS Excel",
+              "Google Chrome"
+          ],
+          answer: 1
+      },
+      {
+          question: "3. VS Code is developed by:",
+          options: [
+              "Google",
+              "Apple",
+              "Microsoft",
+              "Mozilla"
+          ],
+          answer: 2
+      },
+      {
+          question: "4. What is the purpose of a terminal or command line?",
+          options: [
+              "Watch YouTube",
+              "Run commands and programs",
+              "Design websites",
+              "Edit photos"
+          ],
+          answer: 1
+      },
+      {
+          question: "5. Which key opens the terminal in VS Code?",
+          options: [
+              "Ctrl + T",
+              "Ctrl + Shift + `",
+              "Ctrl + P",
+              "Alt + Enter"
+          ],
+          answer: 1
+      },
+      {
+          question: "6. What is Git?",
+          options: [
+              "A type of virus",
+              "A programming language",
+              "A version control system",
+              "A text editor"
+          ],
+          answer: 2
+      },
+      {
+          question: "7. GitHub is mainly used for:",
+          options: [
+              "Hosting and sharing code",
+              "Editing videos",
+              "Sending emails",
+              "Playing music"
+          ],
+          answer: 0
+      },
+      {
+          question: "8. Which command initializes a new Git repository?",
+          options: [
+              "git start",
+              "git init",
+              "git new",
+              "git repo"
+          ],
+          answer: 1
+      },
+      {
+          question: "9. What does 'npm' stand for?",
+          options: [
+              "Node Programming Module",
+              "Network Program Manager",
+              "Node Package Manager",
+              "Native Process Manager"
+          ],
+          answer: 2
+      },
+      {
+          question: "10. Which language requires a browser to run?",
+          options: [
+              "Python",
+              "C++",
+              "JavaScript",
+              "Java"
+          ],
+          answer: 2
+      },
+      {
+          question: "11. Which tool helps to manage different versions of Node.js?",
+          options: [
+              "NVM",
+              "VS Code",
+              "React",
+              "Docker"
+          ],
+          answer: 0
+      },
+      {
+          question: "12. Node.js is used for:",
+          options: [
+              "Frontend design only",
+              "Running JavaScript outside the browser",
+              "Creating videos",
+              "Compiling C++"
+          ],
+          answer: 1
+      },
+      {
+          question: "13. The command to install a global npm package is:",
+          options: [
+              "npm put -g",
+              "npm install global",
+              "npm i -g package-name",
+              "npm get"
+          ],
+          answer: 2
+      },
+      {
+          question: "14. What does 'Live Server' do in VS Code?",
+          options: [
+              "Plays music",
+              "Runs JavaScript code",
+              "Automatically reloads browser when files change",
+              "Compiles C++ code"
+          ],
+          answer: 2
+      },
+      {
+          question: "15. Which extension helps in formatting code in VS Code?",
+          options: [
+              "Prettier",
+              "YouTube",
+              "Terminal Plus",
+              "Dark Reader"
+          ],
+          answer: 0
+      },
+      {
+          question: "16. Which keyboard shortcut formats code in VS Code?",
+          options: [
+              "Ctrl + Alt + F",
+              "Ctrl + Shift + F",
+              "Alt + F4",
+              "Ctrl + F"
+          ],
+          answer: 1
+      },
+      {
+          question: "17. Git helps you with:",
+          options: [
+              "Code styling",
+              "Version control",
+              "Server hosting",
+              "Writing emails"
+          ],
+          answer: 1
+      },
+      {
+          question: "18. A Git repository can be hosted on:",
+          options: [
+              "YouTube",
+              "Facebook",
+              "GitHub",
+              "Spotify"
+          ],
+          answer: 2
+      },
+      {
+          question: "19. What is a commit in Git?",
+          options: [
+              "Copying files",
+              "Taking a snapshot of code changes",
+              "Deleting a file",
+              "Installing software"
+          ],
+          answer: 1
+      },
+      {
+          question: "20. Which extension allows you to use Emmet in VS Code?",
+          options: [
+              "Emmet Live",
+              "Emmet Snippets",
+              "It’s built-in",
+              "HTML Enhancer"
+          ],
+          answer: 2
+      },
+      {
+          question: "21. What does the 'code' command do in terminal (if VS Code is added to PATH)?",
+          options: [
+              "Opens terminal",
+              "Opens VS Code",
+              "Compiles Python",
+              "Creates folders"
+          ],
+          answer: 1
+      },
+      {
+          question: "22. The file used to define project dependencies in Node.js is:",
+          options: [
+              "index.html",
+              "app.js",
+              "package.json",
+              "main.css"
+          ],
+          answer: 2
+      },
+      {
+          question: "23. What is the benefit of using terminal over GUI?",
+          options: [
+              "Slower",
+              "More efficient and flexible",
+              "Takes more memory",
+              "Less secure"
+          ],
+          answer: 1
+      },
+      {
+          question: "24. Extensions in VS Code are used to:",
+          options: [
+              "Reduce performance",
+              "Add new features",
+              "Remove bugs",
+              "Watch videos"
+          ],
+          answer: 1
+      },
+      {
+          question: "25. How do you open the extension marketplace in VS Code?",
+          options: [
+              "Ctrl + E",
+              "Ctrl + Shift + X",
+              "Alt + F4",
+              "Ctrl + Alt + T"
+          ],
+          answer: 1
+      },
+      {
+          question: "26. What command creates a new React app using terminal?",
+          options: [
+              "npx create-app",
+              "npx create-react-app myapp",
+              "npm new react",
+              "node init react"
+          ],
+          answer: 1
+      },
+      {
+          question: "27. The best way to install VS Code is from:",
+          options: [
+              "Third-party websites",
+              "GitHub",
+              "Official website",
+              "Google search"
+          ],
+          answer: 2
+      },
+      {
+          question: "28. Git tracks changes in files through:",
+          options: [
+              "Logs",
+              "Commits",
+              "Packages",
+              "Tags"
+          ],
+          answer: 1
+      },
+      {
+          question: "29. What is the name of the default branch in Git (new versions)?",
+          options: [
+              "Master",
+              "Main",
+              "Dev",
+              "Source"
+          ],
+          answer: 1
+      },
+      {
+          question: "30. Which tool is best for full-stack JavaScript development setup?",
+          options: [
+              "MS Word",
+              "Node.js + npm + VS Code + Git",
+              "Photoshop + Chrome",
+              "Turbo C++"
+          ],
+          answer: 1
+      }
+  ];
+  
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

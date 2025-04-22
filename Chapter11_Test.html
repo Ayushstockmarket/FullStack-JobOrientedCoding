@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. JavaScript is primarily used to:",
+          options: [
+            "Create interactive effects within web browsers",
+            "Design the layout of a webpage",
+            "Store data in a database",
+            "Create static web pages",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "2. Which of the following is a correct way to declare a JavaScript variable?",
+          options: [
+            "var myVar;",
+            "variable myVar;",
+            "let = myVar;",
+            "myVar := ;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "3. Which JavaScript keyword is used to define a constant?",
+          options: ["const", "let", "static", "var"],
+          answer: 0,
+        },
+        {
+          question: "4. How can you output 'Hello, World!' in JavaScript?",
+          options: [
+            "console.log('Hello, World!');",
+            "echo('Hello, World!');",
+            "alert('Hello, World!');",
+            "print('Hello, World!');",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "5. Which of the following is the correct way to define a function in JavaScript?",
+          options: [
+            "function myFunction() {}",
+            "def myFunction() {}",
+            "function: myFunction() {}",
+            "fn myFunction() {}",
+          ],
+          answer: 0,
+        },
+        {
+          question: "6. What does 'var' keyword do in JavaScript?",
+          options: [
+            "Declares a variable",
+            "Declares a constant",
+            "Declares a function",
+            "Declares an array",
+          ],
+          answer: 0,
+        },
+        {
+          question: "7. How do you create an array in JavaScript?",
+          options: [
+            "let arr = []",
+            "let arr = {}",
+            "let arr = ()",
+            "let arr = <>",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "8. Which of the following is a correct JavaScript object syntax?",
+          options: [
+            "let obj = { key: value };",
+            "let obj = [ key: value ];",
+            "let obj = ( key: value );",
+            "let obj = key: value;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "9. Which operator is used to compare both value and type in JavaScript?",
+          options: ["===", "==", "!==", "=>"],
+          answer: 0,
+        },
+        {
+          question:
+            "10. How do you check if a condition is true in JavaScript?",
+          options: [
+            "if (condition) {}",
+            "while (condition) {}",
+            "switch (condition) {}",
+            "for (condition) {}",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "11. Which of the following is a loop structure in JavaScript?",
+          options: ["for", "while", "do-while", "All of the above"],
+          answer: 3,
+        },
+        {
+          question: "12. How do you write a comment in JavaScript?",
+          options: [
+            "// This is a comment",
+            "# This is a comment",
+            "/* This is a comment */",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question:
+            "13. Which method can be used to remove the last item from an array in JavaScript?",
+          options: ["pop()", "shift()", "push()", "unshift()"],
+          answer: 0,
+        },
+        {
+          question:
+            "14. Which of the following is the correct way to define a function expression?",
+          options: [
+            "const myFunction = function() {};",
+            "function myFunction() {};",
+            "myFunction = function() {};",
+            "function = myFunction() {};",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "15. What will the following JavaScript code output? console.log(2 + '2');",
+          options: ["4", "'22'", "Error", "undefined"],
+          answer: 1,
+        },
+        {
+          question:
+            "16. Which of the following is the correct syntax for a JavaScript array?",
+          options: [
+            "let arr = ['apple', 'banana'];",
+            "let arr = (apple, banana);",
+            "let arr = {apple, banana};",
+            "let arr = <apple, banana>;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "17. What does 'this' refer to in JavaScript?",
+          options: [
+            "The current object",
+            "The global object",
+            "The function itself",
+            "None of the above",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "18. Which of the following is used to define an object in JavaScript?",
+          options: [
+            "let obj = {};",
+            "let obj = [];",
+            "let obj = ();",
+            "let obj = <>;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "19. How do you access a property of an object in JavaScript?",
+          options: [
+            "obj.property",
+            "obj[property]",
+            "Both A and B",
+            "None of the above",
+          ],
+          answer: 2,
+        },
+        {
+          question: "20. What is the result of '5' + 3 in JavaScript?",
+          options: ["8", "53", "Error", "NaN"],
+          answer: 1,
+        },
+        {
+          question: "21. How do you create a promise in JavaScript?",
+          options: [
+            "let promise = new Promise();",
+            "let promise = Promise();",
+            "let promise = createPromise();",
+            "let promise = new async();",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "22. Which method is used to convert a string to a number in JavaScript?",
+          options: [
+            "parseInt()",
+            "parseFloat()",
+            "Number()",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question: "23. What does the 'alert()' function do in JavaScript?",
+          options: [
+            "It shows a popup message",
+            "It stores a value in a variable",
+            "It checks for errors",
+            "It terminates a loop",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. What is the correct syntax for adding an event listener in JavaScript?",
+          options: [
+            "element.addEventListener('event', function() {});",
+            "element.addEvent('event', function() {});",
+            "element.addListener('event', function() {});",
+            "element.listen('event', function() {});",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "25. Which of the following methods is used to parse a JSON string in JavaScript?",
+          options: [
+            "JSON.parse()",
+            "JSON.stringify()",
+            "parse.JSON()",
+            "JSON.convert()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "26. What does the 'setTimeout()' function do in JavaScript?",
+          options: [
+            "Executes a function after a specified delay",
+            "Sets a time for a variable",
+            "Sets a time to pause a loop",
+            "None of the above",
+          ],
+          answer: 0,
+        },
+        {
+          question: "27. What is the result of 3 == '3' in JavaScript?",
+          options: ["true", "false", "NaN", "undefined"],
+          answer: 0,
+        },
+        {
+          question:
+            "28. Which operator is used to assign a value to a variable in JavaScript?",
+          options: ["=", "==", "===", ":="],
+          answer: 0,
+        },
+        {
+          question:
+            "29. How do you define a function with default parameters in JavaScript?",
+          options: [
+            "function myFunction(x = 5) {}",
+            "function myFunction(x : 5) {}",
+            "function myFunction(x => 5) {}",
+            "function myFunction(x, 5) {}",
+          ],
+          answer: 0,
+        },
+        {
+          question: "30. How do you call a function in JavaScript?",
+          options: [
+            "myFunction();",
+            "call myFunction();",
+            "execute myFunction();",
+            "myFunction{};",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

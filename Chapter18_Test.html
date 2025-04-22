@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What does 'backend development' refer to?",
+          options: [
+            "The design of the user interface",
+            "The creation of the server, databases, and application logic",
+            "Writing content for the website",
+            "Creating animations and visual effects",
+          ],
+          answer: 1,
+        },
+        {
+          question: "2. Which of the following is NOT a backend technology?",
+          options: ["Node.js", "MongoDB", "PHP", "HTML"],
+          answer: 3,
+        },
+        {
+          question: "3. What is the main role of a backend developer?",
+          options: [
+            "Designing the layout of the website",
+            "Building the server-side logic, databases, and API integration",
+            "Creating interactive user elements",
+            "Improving user experience",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "4. Which programming language is widely used in backend development?",
+          options: ["JavaScript", "Python", "C#", "All of the above"],
+          answer: 3,
+        },
+        {
+          question: "5. What is an API in backend development?",
+          options: [
+            "A design layout tool",
+            "A set of rules that allow different software components to communicate",
+            "A type of database",
+            "A user interface framework",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "6. Which of the following is a popular database for backend development?",
+          options: ["MySQL", "Photoshop", "WordPress", "Figma"],
+          answer: 0,
+        },
+        {
+          question:
+            "7. What is the function of a database in backend development?",
+          options: [
+            "To store and manage data",
+            "To design the website",
+            "To provide the content to the user",
+            "To handle security",
+          ],
+          answer: 0,
+        },
+        {
+          question: "8. What is SQL used for in backend development?",
+          options: [
+            "Writing scripts for front-end interactions",
+            "Managing and querying databases",
+            "Styling web pages",
+            "Running APIs",
+          ],
+          answer: 1,
+        },
+        {
+          question: "9. What does CRUD stand for in backend development?",
+          options: [
+            "Create, Read, Update, Delete",
+            "Create, Retrieve, Upload, Download",
+            "Change, Reload, Undo, Delete",
+            "Call, React, Update, Download",
+          ],
+          answer: 0,
+        },
+        {
+          question: "10. What is a server in backend development?",
+          options: [
+            "A device that processes and stores data",
+            "A tool for designing the frontend",
+            "A piece of hardware for display purposes",
+            "A type of database",
+          ],
+          answer: 0,
+        },
+        {
+          question: "11. What is REST in backend development?",
+          options: [
+            "A design pattern for front-end development",
+            "A set of rules for designing APIs",
+            "A programming language",
+            "A testing framework",
+          ],
+          answer: 1,
+        },
+        {
+          question: "12. What is a web server responsible for?",
+          options: [
+            "Storing web page data",
+            "Hosting databases",
+            "Serving client requests and sending responses",
+            "Providing a user interface",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "13. What is the role of middleware in backend development?",
+          options: [
+            "Interprets client-side requests",
+            "Acts as a bridge between server-side logic and client-side requests",
+            "Designs the user interface",
+            "Ensures security on the frontend",
+          ],
+          answer: 1,
+        },
+        {
+          question: "14. What is an HTTP request?",
+          options: [
+            "A request to access resources on the server",
+            "A programming language",
+            "A file format for images",
+            "A way to retrieve files from the client",
+          ],
+          answer: 0,
+        },
+        {
+          question: "15. What is Node.js used for in backend development?",
+          options: [
+            "Creating a user interface",
+            "Running JavaScript on the server-side",
+            "Designing websites",
+            "Building databases",
+          ],
+          answer: 1,
+        },
+        {
+          question: "16. What is a backend framework?",
+          options: [
+            "A library for designing front-end components",
+            "A set of tools for building backend applications",
+            "A program used to create user interfaces",
+            "A programming language",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "17. Which of the following is a popular backend framework for JavaScript?",
+          options: ["React", "Vue.js", "Express.js", "Bootstrap"],
+          answer: 2,
+        },
+        {
+          question: "18. Which of these is a feature of a backend application?",
+          options: [
+            "User authentication and authorization",
+            "Database management",
+            "API integration",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question: "19. What is session management in backend development?",
+          options: [
+            "Managing the lifetime of a user’s interaction with the server",
+            "Creating frontend animations",
+            "Handling security on the client side",
+            "Managing data on the server-side",
+          ],
+          answer: 0,
+        },
+        {
+          question: "20. What is a NoSQL database?",
+          options: [
+            "A database that uses structured data",
+            "A database that does not follow traditional relational database schemas",
+            "A system that stores code for backend development",
+            "A type of front-end framework",
+          ],
+          answer: 1,
+        },
+        {
+          question: "21. Which of the following is a popular NoSQL database?",
+          options: ["MongoDB", "MySQL", "SQLite", "Oracle DB"],
+          answer: 0,
+        },
+        {
+          question: "22. What is the purpose of server-side rendering (SSR)?",
+          options: [
+            "Rendering content on the client-side only",
+            "Rendering content on the server before sending it to the client",
+            "Improving SEO rankings on search engines",
+            "All of the above",
+          ],
+          answer: 1,
+        },
+        {
+          question: "23. What is the role of caching in backend development?",
+          options: [
+            "To improve the speed and performance of the application by storing frequently accessed data",
+            "To store data on the client-side",
+            "To store images and videos for display",
+            "To maintain the security of the website",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. Which of these is a common tool used for backend testing?",
+          options: ["Jest", "JQuery", "React Testing Library", "Mocha"],
+          answer: 3,
+        },
+        {
+          question:
+            "25. What is the purpose of a version control system like Git in backend development?",
+          options: [
+            "To manage frontend designs",
+            "To track and manage changes in code over time",
+            "To optimize the performance of the backend",
+            "To handle server configurations",
+          ],
+          answer: 1,
+        },
+        {
+          question: "26. What is JSON used for in backend development?",
+          options: [
+            "A database format",
+            "Storing user interface data",
+            "A format for transmitting data between server and client",
+            "A JavaScript framework",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "27. Which HTTP method is used to retrieve data from the server?",
+          options: ["POST", "GET", "PUT", "DELETE"],
+          answer: 1,
+        },
+        {
+          question:
+            "28. Which of these is a key feature of a backend developer’s role?",
+          options: [
+            "Creating database queries",
+            "Designing web pages",
+            "Creating interactive front-end elements",
+            "None of the above",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "29. What is the purpose of the backend in a full-stack application?",
+          options: [
+            "Handling data storage and retrieval",
+            "Displaying content to users",
+            "Creating the visual layout",
+            "All of the above",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "30. Which of the following is an example of backend architecture?",
+          options: [
+            "Client-server model",
+            "Model-View-Controller (MVC)",
+            "Document Object Model (DOM)",
+            "All of the above",
+          ],
+          answer: 1,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

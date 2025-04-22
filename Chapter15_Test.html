@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is the primary purpose of responsive web design?",
+          options: [
+            "To make websites compatible with multiple devices",
+            "To make websites visually appealing",
+            "To speed up website loading times",
+            "To ensure websites are SEO optimized",
+          ],
+          answer: 0,
+        },
+        {
+          question: "2. What is a media query in CSS?",
+          options: [
+            "A rule that applies styles based on device characteristics",
+            "A query used to fetch media files",
+            "A type of search engine optimization",
+            "A JavaScript function",
+          ],
+          answer: 0,
+        },
+        {
+          question: "3. How do you write a basic media query in CSS?",
+          options: [
+            "@media (max-width: 600px) { }",
+            "media (width: 600px) { }",
+            "query { width: 600px; }",
+            "media-query: max-width(600px);",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "4. Which of the following is a commonly used breakpoint in responsive design?",
+          options: ["600px", "1000px", "1200px", "All of the above"],
+          answer: 3,
+        },
+        {
+          question:
+            "5. What is the significance of 'max-width' in a media query?",
+          options: [
+            "It applies styles when the viewport width is less than or equal to the specified value",
+            "It applies styles when the viewport width is greater than or equal to the specified value",
+            "It applies styles for screens larger than the specified value",
+            "It applies styles only for portrait mode",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "6. What property can you change in a media query to adapt the layout of an element?",
+          options: ["Width", "Font-size", "Padding", "All of the above"],
+          answer: 3,
+        },
+        {
+          question:
+            "7. How do you apply different styles for landscape orientation?",
+          options: [
+            "@media (orientation: landscape) { }",
+            "@media (width: 800px) { }",
+            "@media (device-width: 600px) { }",
+            "@media (portrait) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "8. Which CSS property is commonly used to make images responsive in a media query?",
+          options: [
+            "max-width: 100%",
+            "width: auto;",
+            "height: auto;",
+            "display: block;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "9. How can you target devices with a specific screen resolution using media queries?",
+          options: [
+            "@media (resolution: 2dppx) { }",
+            "@media (device-width: 2px) { }",
+            "@media (height: 720px) { }",
+            "@media (width: 1080px) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "10. What is a common technique to make a website layout responsive?",
+          options: [
+            "Use fluid grids and flexible images",
+            "Use fixed-width containers",
+            "Set all elements to 100px",
+            "None of the above",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "11. How do you apply a media query for devices with a minimum width of 1024px?",
+          options: [
+            "@media (min-width: 1024px) { }",
+            "@media (width: 1024px) { }",
+            "@media (device-width: 1024px) { }",
+            "@media (max-width: 1024px) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "12. What does the 'min-height' property in a media query do?",
+          options: [
+            "It applies styles when the viewport height is greater than or equal to the specified value",
+            "It applies styles when the viewport width is greater than or equal to the specified value",
+            "It applies styles based on the content height",
+            "It applies styles when the element exceeds a certain height",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "13. What happens if multiple media queries conflict with each other?",
+          options: [
+            "The last media query to load will take precedence",
+            "The first media query to load will take precedence",
+            "The media queries will not apply styles",
+            "It depends on the specificity of the selectors",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "14. How do you apply a media query for mobile devices only?",
+          options: [
+            "@media (max-width: 767px) { }",
+            "@media (width: 600px) { }",
+            "@media (device-width: 375px) { }",
+            "@media (max-device-width: 480px) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "15. Which of the following is NOT a valid media feature in CSS?",
+          options: ["height", "orientation", "resolution", "device-width"],
+          answer: 0,
+        },
+        {
+          question:
+            "16. How can you ensure a website is mobile-friendly with media queries?",
+          options: [
+            "Use fluid layouts and adaptive images",
+            "Set all elements to fixed sizes",
+            "Use large fonts only",
+            "Remove all media queries",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "17. How do you define a media query that applies only to high-resolution screens?",
+          options: [
+            "@media (min-resolution: 2dppx) { }",
+            "@media (resolution: 2dppx) { }",
+            "@media (min-resolution: 150dpi) { }",
+            "@media (high-resolution) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question: "18. How can you make text responsive in a media query?",
+          options: [
+            "By using relative units like em or rem for font-size",
+            "By using px for font-size",
+            "By setting font-size to 100%",
+            "By using the font-family property",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "19. How do you apply a media query for devices with a maximum width of 480px?",
+          options: [
+            "@media (max-width: 480px) { }",
+            "@media (min-width: 480px) { }",
+            "@media (width: 480px) { }",
+            "@media (device-width: 480px) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "20. How can you change the layout of a website on smaller screens?",
+          options: [
+            "By adjusting the grid system and columns using media queries",
+            "By setting the body tag width to 100%",
+            "By using inline styles only",
+            "By removing images on smaller screens",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "21. What is the benefit of using media queries for responsive design?",
+          options: [
+            "It ensures a consistent experience across different screen sizes",
+            "It speeds up website loading time",
+            "It improves SEO ranking",
+            "It simplifies the design process",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "22. Which media feature allows you to target devices with portrait orientation?",
+          options: [
+            "@media (orientation: portrait) { }",
+            "@media (portrait) { }",
+            "@media (max-width: 600px) { }",
+            "@media (landscape) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "23. How do you apply a media query that targets screen widths greater than 1200px?",
+          options: [
+            "@media (min-width: 1200px) { }",
+            "@media (max-width: 1200px) { }",
+            "@media (device-width: 1200px) { }",
+            "@media (width: 1200px) { }",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. What should you avoid when designing a responsive website?",
+          options: [
+            "Using fixed-width elements",
+            "Using flexible grids",
+            "Using percentage-based widths",
+            "Using relative units for font sizes",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "25. How can you ensure an image scales correctly with the size of the screen?",
+          options: [
+            "By setting the image's width to 100%",
+            "By setting the image's width in px",
+            "By setting the image's width to auto",
+            "By setting the image to a fixed size",
+          ],
+          answer: 0,
+        },
+        {
+          question: "26. What does the 'em' unit do in a responsive layout?",
+          options: [
+            "It allows the size of an element to be relative to the font-size of its parent",
+            "It sets an element's size to 1% of the parent element",
+            "It sets an element's size to the width of the viewport",
+            "It has no effect on layout",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "27. How can you hide elements on smaller screens using CSS?",
+          options: [
+            "By using 'display: none;' in a media query",
+            "By using 'visibility: hidden;' in a media query",
+            "By using 'width: 0;' in a media query",
+            "All of the above",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. What is the advantage of using 'rem' over 'px' for font sizing in responsive design?",
+          options: [
+            "It is relative to the root font size, making it scalable across devices",
+            "It is more precise than px",
+            "It allows fixed font sizes on all devices",
+            "It reduces the load time of the website",
+          ],
+          answer: 0,
+        },
+        {
+          question: "29. How do you create a responsive navigation bar?",
+          options: [
+            "By using flexbox or grid layout with media queries to stack or resize items",
+            "By using inline-blocks for list items",
+            "By using tables for navigation links",
+            "By setting fixed widths for navigation items",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "30. How can you make the font size of the navigation links smaller on mobile devices?",
+          options: [
+            "By using a media query with a smaller font size for smaller screens",
+            "By setting a fixed font size in px",
+            "By removing the navigation links from mobile screens",
+            "By setting the font size to 0",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

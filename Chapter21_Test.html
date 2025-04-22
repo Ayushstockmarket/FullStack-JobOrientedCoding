@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is MongoDB?",
+          options: [
+            "A relational database management system",
+            "A NoSQL database system",
+            "A SQL database system",
+            "A cloud storage service",
+          ],
+          answer: 1,
+        },
+        {
+          question: "2. MongoDB stores data in which format?",
+          options: ["Tables", "Rows and Columns", "Documents", "Graphs"],
+          answer: 2,
+        },
+        {
+          question:
+            "3. What is the name of the format used to store data in MongoDB?",
+          options: ["JSON", "XML", "BSON", "CSV"],
+          answer: 2,
+        },
+        {
+          question:
+            "4. Which command is used to start MongoDB in the terminal?",
+          options: ["mongo start", "mongod", "start mongo", "mongodb run"],
+          answer: 1,
+        },
+        {
+          question: "5. Which of the following is true about MongoDB?",
+          options: [
+            "It is a NoSQL database",
+            "It uses tables to store data",
+            "It supports SQL queries",
+            "It stores data in spreadsheets",
+          ],
+          answer: 0,
+        },
+        {
+          question: "6. What is the default port number for MongoDB?",
+          options: ["8080", "27017", "5432", "3306"],
+          answer: 1,
+        },
+        {
+          question:
+            "7. Which of the following is an example of a MongoDB database command?",
+          options: [
+            "CREATE DATABASE",
+            "SHOW DATABASES",
+            "SELECT * FROM",
+            "USE DATABASE",
+          ],
+          answer: 1,
+        },
+        {
+          question: "8. How do you select a database in MongoDB?",
+          options: [
+            "USE database_name;",
+            "SELECT database_name;",
+            "db.database_name();",
+            "USE db_name;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "9. How do you create a collection in MongoDB?",
+          options: [
+            "db.createCollection('collection_name');",
+            "create collection('collection_name');",
+            "new collection('collection_name');",
+            "insert collection('collection_name');",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "10. Which command is used to insert a document into a collection in MongoDB?",
+          options: [
+            "db.collection.insert()",
+            "db.collection.add()",
+            "db.collection.create()",
+            "insert into collection()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "11. Which of the following is a valid MongoDB document structure?",
+          options: [
+            "['key': 'value']",
+            "{key: 'value'}",
+            "{'key' : 'value'}",
+            "(key: 'value')",
+          ],
+          answer: 2,
+        },
+        {
+          question: "12. What is a MongoDB document?",
+          options: [
+            "A collection of rows",
+            "A record stored in a collection",
+            "A type of query",
+            "A table",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "13. How do you retrieve all documents from a MongoDB collection?",
+          options: [
+            "db.collection.find()",
+            "db.collection.getAll()",
+            "db.findAll()",
+            "db.collection.select()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "14. Which operator is used in MongoDB to find documents with specific field values?",
+          options: ["WHERE", "SELECT", "LIKE", "eq"],
+          answer: 3,
+        },
+        {
+          question:
+            "15. Which of the following is used to update a document in MongoDB?",
+          options: [
+            "db.collection.updateOne()",
+            "db.collection.modify()",
+            "db.collection.set()",
+            "db.update()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "16. What is the correct syntax to delete a document from a MongoDB collection?",
+          options: [
+            "db.collection.remove()",
+            "db.collection.delete()",
+            "db.collection.drop()",
+            "db.remove()",
+          ],
+          answer: 0,
+        },
+        {
+          question: "17. Which command is used to drop a MongoDB collection?",
+          options: [
+            "db.collection.drop()",
+            "db.collection.remove()",
+            "db.collection.delete()",
+            "db.collection.clear()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "18. How can you count the number of documents in a collection in MongoDB?",
+          options: [
+            "db.collection.countDocuments()",
+            "db.collection.size()",
+            "db.collection.numDocs()",
+            "db.collection.count()",
+          ],
+          answer: 0,
+        },
+        {
+          question: "19. How do you perform an aggregation in MongoDB?",
+          options: [
+            "db.collection.aggregate()",
+            "db.collection.query()",
+            "db.collection.filter()",
+            "db.collection.group()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "20. Which method is used to limit the number of results returned in a MongoDB query?",
+          options: ["limit()", "top()", "slice()", "maxResults()"],
+          answer: 0,
+        },
+        {
+          question:
+            "21. Which of the following methods can be used to sort results in MongoDB?",
+          options: [
+            "db.collection.sort()",
+            "db.collection.orderBy()",
+            "db.collection.find().sort()",
+            "db.sort()",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "22. What is the purpose of the '_id' field in MongoDB documents?",
+          options: [
+            "It is used to uniquely identify documents",
+            "It is used to store sensitive data",
+            "It is used to sort documents",
+            "It is not important",
+          ],
+          answer: 0,
+        },
+        {
+          question: "23. How do you create an index on a field in MongoDB?",
+          options: [
+            "db.collection.createIndex()",
+            "db.collection.index()",
+            "db.collection.indexCreate()",
+            "db.collection.makeIndex()",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "24. Which command is used to check the current database in MongoDB?",
+          options: ["db.name()", "db.database()", "db.getDatabase()", "db"],
+          answer: 3,
+        },
+        {
+          question:
+            "25. Which of the following is the correct way to connect to a MongoDB database using Node.js?",
+          options: [
+            "mongoose.connect('mongodb://localhost/database_name');",
+            "mongo.connect('mongodb://localhost/database_name');",
+            "db.connect('mongodb://localhost/database_name');",
+            "mongodb.connect('mongodb://localhost/database_name');",
+          ],
+          answer: 0,
+        },
+        {
+          question: "26. What is Mongoose in MongoDB?",
+          options: [
+            "A MongoDB client",
+            "A query language",
+            "An Object Data Modeling (ODM) library",
+            "A database schema",
+          ],
+          answer: 2,
+        },
+        {
+          question:
+            "27. How do you add a field to an existing document in MongoDB?",
+          options: [
+            "db.collection.updateOne({field: value});",
+            "db.collection.insertOne({field: value});",
+            "db.collection.add({field: value});",
+            "db.collection.modify({field: value});",
+          ],
+          answer: 0,
+        },
+        {
+          question: "28. How do you ensure data consistency in MongoDB?",
+          options: [
+            "Use transactions",
+            "Use replication",
+            "Use sharding",
+            "All of the above",
+          ],
+          answer: 3,
+        },
+        {
+          question: "29. Which of the following is NOT a feature of MongoDB?",
+          options: [
+            "ACID transactions",
+            "Schema-less documents",
+            "Document-oriented storage",
+            "Built-in support for SQL",
+          ],
+          answer: 3,
+        },
+        {
+          question: "30. What does MongoDB use for data replication?",
+          options: [
+            "Data mirroring",
+            "Sharding",
+            "Replication sets",
+            "Data partitioning",
+          ],
+          answer: 2,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

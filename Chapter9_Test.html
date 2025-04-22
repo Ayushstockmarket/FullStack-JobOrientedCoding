@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What does the 'position' property in CSS control?",
+          options: [
+            "The position of an element relative to its container or page",
+            "The size of an element",
+            "The background color of an element",
+            "The font style of an element",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "2. What are the possible values for the CSS 'position' property?",
+          options: [
+            "static, relative, absolute, fixed, sticky",
+            "block, inline, flex",
+            "absolute, relative, center",
+            "fixed, flex, center",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "3. Which value of the 'position' property makes the element positioned relative to its normal position?",
+          options: ["relative", "absolute", "fixed", "static"],
+          answer: 0,
+        },
+        {
+          question:
+            "4. What does the 'absolute' value of the 'position' property do?",
+          options: [
+            "Positions the element relative to its closest positioned ancestor",
+            "Positions the element relative to the viewport",
+            "Positions the element relative to its initial position",
+            "Positions the element relative to the body",
+          ],
+          answer: 0,
+        },
+        {
+          question: "5. How does the 'fixed' position behave in CSS?",
+          options: [
+            "It positions the element relative to the viewport, staying in place when scrolling",
+            "It positions the element relative to the body",
+            "It positions the element relative to the nearest positioned ancestor",
+            "It positions the element relative to the parent",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "6. Which value of the 'position' property makes the element stick to the top or bottom of the page when scrolling?",
+          options: ["sticky", "absolute", "fixed", "relative"],
+          answer: 0,
+        },
+        {
+          question:
+            "7. What does the 'top' property control in a positioned element?",
+          options: [
+            "It sets the distance between the top edge of the element and the top edge of its containing element",
+            "It sets the distance between the left edge of the element and the left edge of its containing element",
+            "It controls the font size",
+            "It controls the padding",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "8. Which property is used to create flexible layouts in CSS?",
+          options: [
+            "display: flex;",
+            "position: flex;",
+            "flex-layout: true;",
+            "layout: flex;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "9. What is the default value of the 'display' property in CSS?",
+          options: ["block", "inline", "flex", "static"],
+          answer: 0,
+        },
+        {
+          question:
+            "10. What does the 'flex-direction' property do in Flexbox?",
+          options: [
+            "Defines the direction in which the flex items are placed in the container",
+            "Aligns items vertically",
+            "Adjusts the width of flex items",
+            "Creates space between flex items",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "11. Which value of the 'flex-direction' property arranges items from top to bottom?",
+          options: ["column", "row", "column-reverse", "row-reverse"],
+          answer: 0,
+        },
+        {
+          question:
+            "12. What does the 'justify-content' property control in Flexbox?",
+          options: [
+            "It aligns flex items along the main axis",
+            "It aligns flex items along the cross axis",
+            "It sets the width of flex items",
+            "It controls the margin of flex items",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "13. How do you align flex items to the center of the container using Flexbox?",
+          options: [
+            "justify-content: center;",
+            "align-items: center;",
+            "align-content: center;",
+            "flex-align: center;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "14. Which property is used to control the space between flex items?",
+          options: ["gap", "space-between", "justify-space", "flex-gap"],
+          answer: 0,
+        },
+        {
+          question:
+            "15. What does the 'align-items' property control in Flexbox?",
+          options: [
+            "It aligns items along the cross axis",
+            "It adjusts the width of flex items",
+            "It sets the distance between flex items",
+            "It controls the height of the container",
+          ],
+          answer: 0,
+        },
+        {
+          question: "16. What does the 'flex-wrap' property do in Flexbox?",
+          options: [
+            "Specifies whether the flex container should allow items to wrap onto the next line",
+            "Aligns flex items to the top",
+            "Defines the size of the flex items",
+            "Sets the gap between flex items",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "17. Which value of the 'flex-wrap' property allows items to wrap?",
+          options: ["wrap", "nowrap", "wrap-reverse", "wrap-items"],
+          answer: 0,
+        },
+        {
+          question:
+            "18. How do you make a flex container fill the available space in CSS?",
+          options: [
+            "flex: 1;",
+            "width: 100%;",
+            "flex-grow: 1;",
+            "display: block;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "19. What does the 'flex-grow' property control?",
+          options: [
+            "It defines how much a flex item will grow relative to other items",
+            "It defines the width of the flex item",
+            "It controls the text size of the flex item",
+            "It sets the padding of the flex item",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "20. What is the purpose of the 'order' property in Flexbox?",
+          options: [
+            "It controls the order in which the flex items appear",
+            "It adjusts the height of the flex item",
+            "It changes the background color of flex items",
+            "It sets the font style of flex items",
+          ],
+          answer: 0,
+        },
+        {
+          question: "21. How do you create a flex container in CSS?",
+          options: [
+            "display: flex;",
+            "position: flex;",
+            "flex-container: true;",
+            "layout: flex;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "22. What does the 'align-content' property do in Flexbox?",
+          options: [
+            "It aligns the entire flex container’s lines along the cross axis",
+            "It aligns the flex items along the main axis",
+            "It adjusts the width of the flex items",
+            "It controls the padding of the flex container",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "23. How do you control the alignment of items within a flex container on the cross axis?",
+          options: [
+            "align-items",
+            "justify-content",
+            "flex-align",
+            "cross-align",
+          ],
+          answer: 0,
+        },
+        {
+          question: "24. How does the 'position: absolute' work with Flexbox?",
+          options: [
+            "The element is positioned relative to its nearest positioned ancestor, ignoring the Flexbox layout",
+            "The element is positioned relative to the container's Flexbox layout",
+            "The element stays within the Flexbox layout",
+            "The element adjusts its size based on Flexbox properties",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "25. How can you set an element to stretch across all available space in Flexbox?",
+          options: [
+            "flex: 1;",
+            "stretch: 100%;",
+            "width: 100%;",
+            "flex-stretch: true;",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "26. Which value of the 'align-items' property aligns items at the top of the flex container?",
+          options: ["flex-start", "center", "flex-end", "stretch"],
+          answer: 0,
+        },
+        {
+          question: "27. What does the 'flex-basis' property control?",
+          options: [
+            "It defines the initial size of a flex item before any available space is distributed",
+            "It sets the minimum width of the item",
+            "It defines the order of the flex item",
+            "It adjusts the background color of the item",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "28. Which property is used to align flex items vertically in a flex container?",
+          options: [
+            "align-items",
+            "justify-content",
+            "flex-align",
+            "text-align",
+          ],
+          answer: 0,
+        },
+        {
+          question: "29. How can you reverse the direction of the flex items?",
+          options: [
+            "flex-direction: row-reverse;",
+            "flex-reverse: true;",
+            "reverse: true;",
+            "direction: reverse;",
+          ],
+          answer: 0,
+        },
+        {
+          question: "30. What does the 'flex-shrink' property do in Flexbox?",
+          options: [
+            "It defines how much a flex item will shrink relative to other items in the container",
+            "It defines the initial size of a flex item",
+            "It controls the text alignment of a flex item",
+            "It adjusts the padding of a flex item",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

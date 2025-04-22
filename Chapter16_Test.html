@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is Git?",
+          options: [
+            "A programming language",
+            "A version control system",
+            "A text editor",
+            "A framework",
+          ],
+          answer: 1,
+        },
+        {
+          question: "2. What is the primary purpose of Git?",
+          options: [
+            "To manage files on a computer",
+            "To track changes in files and collaborate on projects",
+            "To create websites",
+            "To monitor website traffic",
+          ],
+          answer: 1,
+        },
+        {
+          question: "3. What does the command 'git init' do?",
+          options: [
+            "Initializes a new repository",
+            "Commits changes to the repository",
+            "Displays the status of the repository",
+            "Links to a remote repository",
+          ],
+          answer: 0,
+        },
+        {
+          question: "4. What is GitHub?",
+          options: [
+            "A text editor",
+            "A cloud-based version control repository hosting service",
+            "A Git command",
+            "A web browser",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "5. Which command is used to check the status of files in a Git repository?",
+          options: ["git status", "git log", "git commit", "git push"],
+          answer: 0,
+        },
+        {
+          question: "6. How do you create a new branch in Git?",
+          options: [
+            "git create branch <branch-name>",
+            "git branch <branch-name>",
+            "git checkout <branch-name>",
+            "git switch <branch-name>",
+          ],
+          answer: 1,
+        },
+        {
+          question: "7. What is a commit in Git?",
+          options: [
+            "A branch created in a repository",
+            "A snapshot of changes in the repository",
+            "A remote repository",
+            "A file created in the repository",
+          ],
+          answer: 1,
+        },
+        {
+          question: "8. How do you add changes to the staging area in Git?",
+          options: [
+            "git add <file-name>",
+            "git commit <file-name>",
+            "git push <file-name>",
+            "git status <file-name>",
+          ],
+          answer: 0,
+        },
+        {
+          question: "9. What does 'git clone' do?",
+          options: [
+            "Creates a new repository",
+            "Creates a local copy of a remote repository",
+            "Pushes changes to a remote repository",
+            "Checks the status of a repository",
+          ],
+          answer: 1,
+        },
+        {
+          question: "10. What is a repository in Git?",
+          options: [
+            "A file in a project",
+            "A branch where code is stored",
+            "A directory that stores project files and history",
+            "A tool for managing project dependencies",
+          ],
+          answer: 2,
+        },
+        {
+          question: "11. How do you commit changes in Git?",
+          options: [
+            "git commit -m <message>",
+            "git push -m <message>",
+            "git add -m <message>",
+            "git push -m <file-name>",
+          ],
+          answer: 0,
+        },
+        {
+          question: "12. What is a 'merge' in Git?",
+          options: [
+            "Combining two or more branches",
+            "Removing a file from the repository",
+            "Renaming a branch",
+            "Copying a file to a new branch",
+          ],
+          answer: 0,
+        },
+        {
+          question: "13. How do you check the commit history in Git?",
+          options: ["git status", "git log", "git history", "git info"],
+          answer: 1,
+        },
+        {
+          question:
+            "14. How do you remove a file from the staging area in Git?",
+          options: [
+            "git remove <file-name>",
+            "git delete <file-name>",
+            "git reset <file-name>",
+            "git unstage <file-name>",
+          ],
+          answer: 2,
+        },
+        {
+          question: "15. What is 'git pull' used for?",
+          options: [
+            "To upload changes to the remote repository",
+            "To synchronize the local repository with the remote repository",
+            "To delete a local branch",
+            "To create a new branch",
+          ],
+          answer: 1,
+        },
+        {
+          question: "16. What is a 'fork' on GitHub?",
+          options: [
+            "A command to create a new branch",
+            "A copy of another user's repository",
+            "A type of commit",
+            "A method of merging repositories",
+          ],
+          answer: 1,
+        },
+        {
+          question: "17. How do you push changes to a remote repository?",
+          options: ["git push", "git upload", "git commit", "git send"],
+          answer: 0,
+        },
+        {
+          question:
+            "18. What does the command 'git remote add origin <url>' do?",
+          options: [
+            "Sets the remote repository URL for your local repository",
+            "Clones a remote repository",
+            "Creates a new remote branch",
+            "Pushes changes to the remote repository",
+          ],
+          answer: 0,
+        },
+        {
+          question: "19. What is 'git checkout' used for?",
+          options: [
+            "Switching branches",
+            "Committing changes",
+            "Cloning a repository",
+            "Adding files to staging",
+          ],
+          answer: 0,
+        },
+        {
+          question: "20. What does the 'git diff' command do?",
+          options: [
+            "Shows the changes between the working directory and the last commit",
+            "Shows the differences between two branches",
+            "Shows the status of the repository",
+            "Shows the history of the repository",
+          ],
+          answer: 0,
+        },
+        {
+          question: "21. What is a 'pull request' in GitHub?",
+          options: [
+            "A request to merge changes from one branch into another",
+            "A command to fetch changes from the remote repository",
+            "A request to push changes to a remote repository",
+            "A request to fork a repository",
+          ],
+          answer: 0,
+        },
+        {
+          question: "22. How can you resolve a merge conflict in Git?",
+          options: [
+            "By manually editing the conflicting files",
+            "By deleting one of the branches",
+            "By using 'git merge --abort'",
+            "By using 'git status'",
+          ],
+          answer: 0,
+        },
+        {
+          question: "23. What is 'git rebase' used for?",
+          options: [
+            "To integrate changes from one branch into another",
+            "To discard changes in a commit",
+            "To create a new branch",
+            "To reset the repository",
+          ],
+          answer: 0,
+        },
+        {
+          question: "24. What is a Git tag?",
+          options: [
+            "A label to mark specific points in the repository history",
+            "A type of branch",
+            "A way to rename a branch",
+            "A description of a commit",
+          ],
+          answer: 0,
+        },
+        {
+          question: "25. How do you revert a commit in Git?",
+          options: [
+            "git revert <commit-hash>",
+            "git reset <commit-hash>",
+            "git undo <commit-hash>",
+            "git delete <commit-hash>",
+          ],
+          answer: 0,
+        },
+        {
+          question: "26. What is 'git stash' used for?",
+          options: [
+            "To temporarily save changes and clean the working directory",
+            "To discard changes in the working directory",
+            "To commit changes to a branch",
+            "To push changes to the remote repository",
+          ],
+          answer: 0,
+        },
+        {
+          question:
+            "27. What is the difference between 'git reset' and 'git revert'?",
+          options: [
+            "'git reset' changes the commit history, while 'git revert' creates a new commit to undo changes",
+            "'git reset' creates a new commit, while 'git revert' changes the commit history",
+            "'git reset' is used for pushing, while 'git revert' is used for pulling",
+            "'git reset' is for local repositories, while 'git revert' is for remote repositories",
+          ],
+          answer: 0,
+        },
+        {
+          question: "28. How do you create a new remote repository on GitHub?",
+          options: [
+            "By creating a repository on GitHub's website and linking it with 'git remote add origin'",
+            "By using 'git remote create <repo-name>'",
+            "By using 'git clone <repo-name>'",
+            "By pushing an existing local repository to GitHub",
+          ],
+          answer: 0,
+        },
+        {
+          question: "29. How do you delete a branch in Git?",
+          options: [
+            "git branch -d <branch-name>",
+            "git delete branch <branch-name>",
+            "git remove branch <branch-name>",
+            "git erase branch <branch-name>",
+          ],
+          answer: 0,
+        },
+        {
+          question: "30. What does the command 'git pull --rebase' do?",
+          options: [
+            "Fetches changes from the remote repository and rebases them on top of the current branch",
+            "Fetches changes from the remote repository without rebasing",
+            "Pushes changes to the remote repository",
+            "Merges two branches without conflicts",
+          ],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./Chapters.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development MCQ Test | JobOrientedCoding</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <!-- YouTube Banner - You can change the link -->
+        <div class="youtube-banner">
+          📺 Learn Web Development for FREE on
+    <a href="https://www.youtube.com/@JobOrientedCoding" target="_blank"
+            >JobOrientedCoding YouTube Channel</a
+          >
+        </div>
+
+        <!-- Custom Title - You can change this -->
+        <h1 class="test-title">Web Development Fundamentals MCQ Test</h1>
+
+        <!-- Custom Description - You can change this -->
+        <p class="test-description">
+          Test your knowledge of basic web development concepts. This quiz
+          contains 30 questions covering HTML, CSS, JavaScript, and more.
+        </p>
+      </header>
+
+      <div class="quiz-container" id="quiz-container">
+        <!-- Questions will be inserted here by JavaScript -->
+      </div>
+
+      <button id="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+
+      <div class="result-container" id="result-container">
+        <h2 class="result-title">Your Test Result</h2>
+        <div class="score" id="score-display">0/30</div>
+
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="result-message"></p>
+
+        <div class="previous-results" id="previous-results">
+          <h3>Your Previous Attempts</h3>
+          <ul id="attempts-list"></ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2023 JobOrientedCoding | Web Development Course</p>
+      </footer>
+    </div>
+
+    <script>
+      // ====================== CONFIGURABLE SECTION ======================
+      // You can modify these questions as needed
+      const quizQuestions = [
+        {
+          question: "1. What is an HTML element?",
+          options: [
+            "A single HTML tag",
+            "A combination of start and end tags with content",
+            "Only text in a web page",
+            "An HTML file",
+          ],
+          answer: 1,
+        },
+        {
+          question: "2. Which of the following is a self-closing tag?",
+          options: ["<p>", "<div>", "<img>", "<section>"],
+          answer: 2,
+        },
+        {
+          question: "3. Which element is used to group block-level content?",
+          options: ["<div>", "<span>", "<p>", "<group>"],
+          answer: 0,
+        },
+        {
+          question: "4. Which element is used to group inline content?",
+          options: ["<div>", "<span>", "<inline>", "<p>"],
+          answer: 1,
+        },
+        {
+          question: "5. The <head> element typically contains:",
+          options: [
+            "Page content",
+            "Metadata, links, scripts",
+            "Navigation bar",
+            "Footer",
+          ],
+          answer: 1,
+        },
+        {
+          question: "6. Which element defines the visible content of a page?",
+          options: ["<head>", "<body>", "<meta>", "<title>"],
+          answer: 1,
+        },
+        {
+          question: "7. Which tag defines emphasized text (usually italic)?",
+          options: ["<b>", "<strong>", "<em>", "<highlight>"],
+          answer: 2,
+        },
+        {
+          question: "8. The <strong> element is used to:",
+          options: [
+            "Make text italic",
+            "Bold text with importance",
+            "Underline text",
+            "Change font",
+          ],
+          answer: 1,
+        },
+        {
+          question: "9. What is the role of the <footer> element?",
+          options: [
+            "Adds footnotes",
+            "Contains author, copyright, etc.",
+            "Adds end line",
+            "Defines margins",
+          ],
+          answer: 1,
+        },
+        {
+          question: "10. Which element defines navigation links?",
+          options: ["<navigate>", "<nav>", "<links>", "<header>"],
+          answer: 1,
+        },
+        {
+          question:
+            "11. Which element is used to define the main content of a document?",
+          options: ["<main>", "<body>", "<div>", "<section>"],
+          answer: 0,
+        },
+        {
+          question: "12. The <article> element is used when:",
+          options: [
+            "Grouping media only",
+            "You want independent, self-contained content",
+            "Creating page titles",
+            "Adding a blog link",
+          ],
+          answer: 1,
+        },
+        {
+          question: "13. Which tag is used for short quotes?",
+          options: ["<quote>", "<blockquote>", "<q>", "<cite>"],
+          answer: 2,
+        },
+        {
+          question: "14. Which tag is used for long quotations?",
+          options: ["<q>", "<blockquote>", "<longquote>", "<cite>"],
+          answer: 1,
+        },
+        {
+          question: "15. Which element represents pre-formatted text?",
+          options: ["<format>", "<code>", "<pre>", "<text>"],
+          answer: 2,
+        },
+        {
+          question: "16. The <code> element is used to display:",
+          options: [
+            "Inline code snippets",
+            "Bold text",
+            "Link tags",
+            "Error messages",
+          ],
+          answer: 0,
+        },
+        {
+          question: "17. The <mark> tag is used for:",
+          options: [
+            "Adding watermarks",
+            "Highlighting text",
+            "Making text bold",
+            "Tracking page views",
+          ],
+          answer: 1,
+        },
+        {
+          question:
+            "18. Which element is used to define a line across the page?",
+          options: ["<line>", "<break>", "<hr>", "<divider>"],
+          answer: 2,
+        },
+        {
+          question:
+            "19. Which element is used to define a label for an input field?",
+          options: ["<name>", "<input-label>", "<label>", "<form-text>"],
+          answer: 2,
+        },
+        {
+          question: "20. What does the <fieldset> element do?",
+          options: [
+            "Defines a container for options",
+            "Groups related form elements",
+            "Adds a border to form",
+            "Creates dropdown",
+          ],
+          answer: 1,
+        },
+        {
+          question: "21. What is the purpose of the <legend> element?",
+          options: [
+            "Gives a title to a fieldset",
+            "Labels the form",
+            "Hides the fieldset",
+            "Links to scripts",
+          ],
+          answer: 0,
+        },
+        {
+          question: "22. Which tag is used to add keyboard input display?",
+          options: ["<kbd>", "<input>", "<key>", "<button>"],
+          answer: 0,
+        },
+        {
+          question: "23. Which tag is used to reference the source of a quote?",
+          options: ["<q>", "<cite>", "<ref>", "<mention>"],
+          answer: 1,
+        },
+        {
+          question: "24. Which of the following tags is NOT semantic?",
+          options: ["<header>", "<div>", "<footer>", "<article>"],
+          answer: 1,
+        },
+        {
+          question: "25. Which tag is best for defining side content or ads?",
+          options: ["<ad>", "<aside>", "<extra>", "<sidebar>"],
+          answer: 1,
+        },
+        {
+          question: "26. Which tag represents time or date values?",
+          options: ["<datetime>", "<time>", "<date>", "<clock>"],
+          answer: 1,
+        },
+        {
+          question: "27. Which tag creates a table cell?",
+          options: ["<cell>", "<td>", "<tr>", "<th>"],
+          answer: 1,
+        },
+        {
+          question: "28. The <caption> tag is used for:",
+          options: [
+            "Image description",
+            "Table title",
+            "Video subtitle",
+            "Audio transcript",
+          ],
+          answer: 1,
+        },
+        {
+          question: "29. What does the <details> tag provide?",
+          options: [
+            "A summary of text",
+            "Collapsible content",
+            "Form validation",
+            "Image info",
+          ],
+          answer: 1,
+        },
+        {
+          question: "30. The <summary> tag must be used with:",
+          options: ["<details>", "<section>", "<footer>", "<article>"],
+          answer: 0,
+        },
+      ];
+      // Custom messages based on performance
+      const resultMessages = [
+        {
+          min: 0,
+          max: 10,
+          message: "Don't worry! Check out our YouTube tutorials to improve.",
+        },
+        {
+          min: 11,
+          max: 20,
+          message: "Good effort! Keep practicing to get better.",
+        },
+        {
+          min: 21,
+          max: 25,
+          message: "Well done! You have a good understanding.",
+        },
+        {
+          min: 26,
+          max: 30,
+          message: "Excellent! You're ready for advanced topics!",
+        },
+      ];
+      // ====================== END CONFIGURABLE SECTION ======================
+
+      // Load quiz questions when page loads
+      window.onload = function () {
+        loadQuiz();
+        loadPreviousResults();
+      };
+
+      // Function to load the quiz questions
+      function loadQuiz() {
+        const container = document.getElementById("quiz-container");
+
+        quizQuestions.forEach((q, i) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question";
+
+          const questionText = document.createElement("p");
+          questionText.className = "question-text";
+          questionText.textContent = q.question;
+
+          const optionsDiv = document.createElement("div");
+          optionsDiv.className = "options";
+
+          q.options.forEach((opt, j) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = `q${i}`;
+            input.value = j;
+            input.id = `q${i}o${j}`;
+
+            const label = document.createElement("label");
+            label.htmlFor = `q${i}o${j}`;
+            label.textContent = opt;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
+            optionsDiv.appendChild(optionDiv);
+          });
+
+          questionDiv.appendChild(questionText);
+          questionDiv.appendChild(optionsDiv);
+          container.appendChild(questionDiv);
+        });
+      }
+
+      // Function to submit the quiz
+      function submitQuiz() {
+        let score = 0;
+        const results = [];
+
+        // Check each question
+        quizQuestions.forEach((q, i) => {
+          const selected = document.querySelector(
+            `input[name="q${i}"]:checked`
+          );
+          const isCorrect = selected && parseInt(selected.value) === q.answer;
+
+          if (isCorrect) {
+            score++;
+          }
+
+          results.push({
+            question: q.question,
+            selected: selected
+              ? q.options[parseInt(selected.value)]
+              : "Not answered",
+            correct: q.options[q.answer],
+            isCorrect: isCorrect,
+          });
+        });
+
+        // Calculate percentage
+        const percentage = Math.round((score / quizQuestions.length) * 100);
+
+        // Display results
+        document.getElementById(
+          "score-display"
+        ).textContent = `${score}/${quizQuestions.length}`;
+        document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+        // Show appropriate message
+        const messageObj = resultMessages.find(
+          (m) => percentage >= m.min && percentage <= m.max
+        );
+        document.getElementById("result-message").textContent = messageObj
+          ? messageObj.message
+          : "";
+
+        // Show result container
+        document.getElementById("result-container").style.display = "block";
+
+        // Save to local storage
+        saveResult(score, percentage);
+
+        // Scroll to results
+        document
+          .getElementById("result-container")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Function to save result to local storage
+      function saveResult(score, percentage) {
+        let attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+
+        attempts.push({
+          date: new Date().toLocaleString(),
+          score: score,
+          total: quizQuestions.length,
+          percentage: percentage,
+        });
+
+        // Keep only last 5 attempts
+        if (attempts.length > 5) {
+          attempts = attempts.slice(attempts.length - 5);
+        }
+
+        localStorage.setItem("quizAttempts", JSON.stringify(attempts));
+
+        // Update previous results display
+        loadPreviousResults();
+      }
+
+      // Function to load previous results from local storage
+      function loadPreviousResults() {
+        const attempts = JSON.parse(localStorage.getItem("quizAttempts")) || [];
+        const attemptsList = document.getElementById("attempts-list");
+
+        attemptsList.innerHTML = "";
+
+        if (attempts.length === 0) {
+          attemptsList.innerHTML = "<li>No previous attempts yet</li>";
+          return;
+        }
+
+        attempts.reverse().forEach((attempt) => {
+          const li = document.createElement("li");
+          li.textContent = `${attempt.date}: ${attempt.score}/${attempt.total} (${attempt.percentage}%)`;
+          attemptsList.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>
